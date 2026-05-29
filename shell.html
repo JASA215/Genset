@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- v20260530030000 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="GenSet"/>
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png"/>
+<link rel="apple-touch-icon" sizes="167x167" href="icon-167.png"/>
+<link rel="apple-touch-icon" sizes="152x152" href="icon-152.png"/>
+<link rel="apple-touch-icon" sizes="120x120" href="icon-120.png"/>
+<link rel="icon" type="image/png" href="icon-180.png"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#0A0E14"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<title>GenSet Aftersales</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0A0E14;font-family:'Segoe UI','Tahoma','Arial',sans-serif;-webkit-tap-highlight-color:transparent;color:#E8EFF7}
+input,select,textarea,button{font-family:'Segoe UI','Tahoma','Arial',sans-serif}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:#2A3A4D;border-radius:2px}
+@media print{
+  .no-print{display:none!important}
+  body{background:white!important;color:#111!important;font-size:11px}
+  table{width:100%;border-collapse:collapse;margin-bottom:12px}
+  th{background:#F5A623;color:#0D0800;padding:6px 8px;font-size:10px;text-align:left}
+  td{padding:5px 8px;border-bottom:1px solid #e0e0e0;font-size:10px}
+}
+</style>
+</head>
+<body>
+<div id="root"><div style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:16px">
+  <div style="font-size:48px">⚡</div>
+  <div style="color:#7D8F9E;font-size:14px">Loading GenSet...</div>
+</div></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<!--REACT-->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+/* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
+(function(){
+  var APP_VERSION="v20260530030000";
+  var lastErr="";
+  function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
+  function showBootError(detail){
+    if(window.__BOOTED) return;            /* app is running — never clobber it */
+    var root=document.getElementById("root");
+    if(!root) return;
+    root.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;font-family:Segoe UI,Tahoma,Arial,sans-serif">'
+      +'<div style="max-width:520px;width:100%;background:#121823;border:1px solid #2A3A4D;border-radius:14px;padding:24px;color:#E8EFF7">'
+      +'<div style="font-size:30px;margin-bottom:10px">&#9888;&#65039;</div>'
+      +'<div style="font-size:18px;font-weight:800;color:#F5A623;margin-bottom:8px">GenSet failed to load</div>'
+      +'<div style="font-size:13px;color:#7D8F9E;line-height:1.5;margin-bottom:14px">The app did not start. This is usually a code error in the latest update, or a library failed to load. Details below.</div>'
+      +'<pre style="white-space:pre-wrap;word-break:break-word;background:#0A0E14;border:1px solid #2A3A4D;border-radius:8px;padding:12px;font-size:11px;color:#FF8A8A;max-height:170px;overflow:auto;margin:0 0 14px">'+(detail||"Unknown error")+'</pre>'
+      +'<button onclick="location.reload(true)" style="background:linear-gradient(135deg,#F5A623,#C47B0A);color:#0D0800;border:none;border-radius:10px;padding:12px 18px;font-size:14px;font-weight:800;cursor:pointer">&#8635; Reload</button>'
+      +'<div style="font-size:10px;color:#4A5A6D;margin-top:12px">'+APP_VERSION+'</div>'
+      +'</div></div>';
+  }
+  window.addEventListener("error",function(e){
+    var m=(e.message||"Script error");
+    if(e.filename){m+="\n"+e.filename+(e.lineno?(":"+e.lineno+(e.colno?":"+e.colno:"")):"");}
+    lastErr=m; showBootError(esc(m));
+  });
+  window.addEventListener("unhandledrejection",function(e){
+    lastErr=(e.reason&&(e.reason.stack||e.reason.message))||String(e.reason);
+    showBootError(esc(lastErr));
+  });
+  window.addEventListener("load",function(){
+    setTimeout(function(){
+      if(!window.__BOOTED){
+        showBootError(lastErr?esc(lastErr):"The app did not finish starting within 10 seconds. A library (React, Babel, or Firebase) may have failed to load, or your connection dropped.");
+      }
+    },10000);
+  });
+})();
+</script>
+
+<!--APP-->
+</body>
+</html>

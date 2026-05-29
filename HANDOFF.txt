@@ -1,0 +1,46 @@
+Continue developing my GenSet Aftersales app.
+
+• Live URL: https://jasa215.github.io/Genset
+• Firebase project: genset-68a85
+• Current version: v20260530030000
+
+ARCHITECTURE (app is precompiled — no in-browser Babel):
+• app.src.jsx   ← THE WORKING FILE. Editable React/JSX source. Edit this.
+• shell.html    ← HTML skeleton with <!--REACT--> and <!--APP--> markers.
+• build.js      ← compiles app.src.jsx + inlines React → index.html.
+• index.html    ← GENERATED, deploy-only. Do NOT hand-edit.
+• icon-120/152/167/180.png ← iPad/iPhone home-screen icons.
+• icon-192/512.png + manifest.json ← Android/Chrome home-screen install.
+
+All of the above are committed to the repo root on the `main` branch,
+so source can be recovered with:
+  curl -sL https://raw.githubusercontent.com/jasa215/Genset/main/app.src.jsx
+  curl -sL https://raw.githubusercontent.com/jasa215/Genset/main/shell.html
+  curl -sL https://raw.githubusercontent.com/jasa215/Genset/main/build.js
+(The sandbox filesystem and transcript do NOT persist between sessions —
+always recover source from the repo first.)
+
+BUILD STEP (run after editing app.src.jsx):
+  npm install react@18 react-dom@18 @babel/core @babel/preset-react
+  node build.js
+Before building, bump the version stamp in shell.html (the <!-- v... -->
+comment AND the watchdog APP_VERSION). After building, validate the
+compiled app (node --check on the final <script>) before deploying.
+
+Runtime deps: Firebase from gstatic (required at boot); xlsx is deferred
+(export only, never blocks startup); React is inlined; Babel is gone.
+A boot self-check (showBootError / window.__BOOTED) shows a visible error
+screen instead of a silent infinite "Loading…".
+
+DEPLOY: upload index.html + ALL icon-*.png (120/152/167/180/192/512) +
+manifest.json to repo root on main.
+
+DOMAIN RULES:
+• Roles: admin / manager / branch_manager / supervisor
+• 5 service types: PM / CM / PDI / WC / CC
+• Warranty 3-step approval: supervisor → admin (WC#) → branch manager →
+  supervisor marks Done
+• Only PM counts for branch/tech scores
+• Closure requires: quotation / warranty / invoice / work order / manager approval
+
+Today's pending items: [describe what you want to do next]
