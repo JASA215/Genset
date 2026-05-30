@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530120000 -->
+<!-- v20260530140000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530120000";
+  var APP_VERSION="v20260530140000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -538,9 +538,9 @@ function Pager({
     onClick: () => setPage(p => Math.max(0, p - 1)),
     disabled: page === 0,
     style: {
-      background: page === 0 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.2)",
-      color: page === 0 ? "#3A5A6A" : "#1A6FA8",
-      border: "1px solid " + (page === 0 ? "#1E3247" : "rgba(26,111,168,0.4)"),
+      background: page === 0 ? C.surface : "rgba(26,111,168,0.2)",
+      color: page === 0 ? C.muted : "#1A6FA8",
+      border: "1px solid " + (page === 0 ? C.border : "rgba(26,111,168,0.4)"),
       borderRadius: 9,
       padding: "8px 16px",
       fontWeight: 700,
@@ -556,9 +556,9 @@ function Pager({
     onClick: () => setPage(p => Math.min(pages - 1, p + 1)),
     disabled: page >= pages - 1,
     style: {
-      background: page >= pages - 1 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.2)",
-      color: page >= pages - 1 ? "#3A5A6A" : "#1A6FA8",
-      border: "1px solid " + (page >= pages - 1 ? "#1E3247" : "rgba(26,111,168,0.4)"),
+      background: page >= pages - 1 ? C.surface : "rgba(26,111,168,0.2)",
+      color: page >= pages - 1 ? C.muted : "#1A6FA8",
+      border: "1px solid " + (page >= pages - 1 ? C.border : "rgba(26,111,168,0.4)"),
       borderRadius: 9,
       padding: "8px 16px",
       fontWeight: 700,
@@ -3208,8 +3208,8 @@ function AdminPanel({
       onClick: () => setReqPage(p => Math.max(0, p - 1)),
       disabled: reqPage === 0,
       style: {
-        background: reqPage === 0 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-        color: reqPage === 0 ? "#3A5A6A" : C.blue,
+        background: reqPage === 0 ? C.surface : "rgba(26,111,168,0.25)",
+        color: reqPage === 0 ? C.muted : C.blue,
         border: "1px solid " + (reqPage === 0 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
@@ -3221,8 +3221,8 @@ function AdminPanel({
       onClick: () => setReqPage(p => Math.min(pages - 1, p + 1)),
       disabled: reqPage >= pages - 1,
       style: {
-        background: reqPage >= pages - 1 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-        color: reqPage >= pages - 1 ? "#3A5A6A" : C.blue,
+        background: reqPage >= pages - 1 ? C.surface : "rgba(26,111,168,0.25)",
+        color: reqPage >= pages - 1 ? C.muted : C.blue,
         border: "1px solid " + (reqPage >= pages - 1 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
@@ -4805,7 +4805,7 @@ function AdminPanel({
     }
   }, React.createElement("div", {
     style: {
-      background: "rgba(230,146,10,0.08)",
+      background: C.surface,
       padding: "10px 14px",
       borderBottom: "1px solid " + C.border,
       display: "grid",
@@ -5634,7 +5634,7 @@ function ManagerReport({
       fontWeight: 700,
       fontSize: 11,
       borderBottom: "1px solid " + C.border,
-      background: "rgba(230,146,10,0.08)"
+      background: C.surface
     }
   }, c);
   const Td = ({
@@ -5935,8 +5935,8 @@ function ManagerReport({
     onClick: () => setRPage(p => Math.max(0, p - 1)),
     disabled: rPage === 0,
     style: {
-      background: rPage === 0 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-      color: rPage === 0 ? "#3A5A6A" : C.blue,
+      background: rPage === 0 ? C.surface : "rgba(26,111,168,0.25)",
+      color: rPage === 0 ? C.muted : C.blue,
       border: "1px solid " + (rPage === 0 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
       borderRadius: 7,
       padding: "3px 10px",
@@ -5948,8 +5948,8 @@ function ManagerReport({
     onClick: () => setRPage(p => Math.min(Math.ceil(n / MR_PAGE) - 1, p + 1)),
     disabled: rPage >= Math.ceil(n / MR_PAGE) - 1,
     style: {
-      background: rPage >= Math.ceil(n / MR_PAGE) - 1 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-      color: rPage >= Math.ceil(n / MR_PAGE) - 1 ? "#3A5A6A" : C.blue,
+      background: rPage >= Math.ceil(n / MR_PAGE) - 1 ? C.surface : "rgba(26,111,168,0.25)",
+      color: rPage >= Math.ceil(n / MR_PAGE) - 1 ? C.muted : C.blue,
       border: "1px solid " + (rPage >= Math.ceil(n / MR_PAGE) - 1 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
       borderRadius: 7,
       padding: "3px 10px",
@@ -6249,7 +6249,7 @@ function ManagerReport({
     }
   }))))), low.length > 0 && React.createElement("div", null, React.createElement("div", {
     style: {
-      background: "rgba(207,32,38,0.08)",
+      background: C.surface,
       borderLeft: "3px solid " + C.red,
       borderRadius: 8,
       padding: "9px 14px",
@@ -6280,7 +6280,7 @@ function ManagerReport({
       fontWeight: 700,
       fontSize: 11,
       borderBottom: "1px solid " + C.border,
-      background: "rgba(207,32,38,0.08)"
+      background: C.surface
     }
   }, h)))), React.createElement("tbody", null, low.slice(rPage * MR_PAGE, (rPage + 1) * MR_PAGE).map(s => React.createElement("tr", {
     key: s.id
@@ -7302,7 +7302,7 @@ function StatisticsReport({
       fontWeight: 700,
       fontSize: 11,
       borderBottom: "1px solid " + C.border,
-      background: "rgba(230,146,10,0.08)"
+      background: C.surface
     }
   }, h)))), React.createElement("tbody", null, monthlyData.map((m, i) => {
     const prev = monthlyData[i - 1];
@@ -8162,8 +8162,8 @@ function App() {
     }, ab)))), pendFU.length > 0 && React.createElement("div", {
       onClick: () => setView("followups"),
       style: {
-        background: "rgba(230,146,10,0.08)",
-        border: "1px solid " + C.accent,
+        background: C.card,
+        border: "2px solid " + C.accent,
         borderRadius: 12,
         padding: "12px 16px",
         marginBottom: 12,
@@ -8227,8 +8227,8 @@ function App() {
     }, "\uD83D\uDCCA ", t("Dashboard", "لوحة التحكم")), (isManager || isBranchManager) && subs.filter(s => (s.approvalStatus === "pending" || s.approvalStatus === "pending_admin" || s.approvalStatus === "pending_manager") && (isAdmin || !userBranch || s.branch === userBranch)).length > 0 && React.createElement("div", {
       onClick: () => setView("history"),
       style: {
-        background: "rgba(155,89,182,0.1)",
-        border: "1px solid rgba(155,89,182,0.35)",
+        background: C.card,
+        border: "2px solid rgba(155,89,182,0.6)",
         borderRadius: 13,
         padding: "14px 18px",
         cursor: "pointer"
@@ -8607,8 +8607,8 @@ function App() {
         onClick: () => setHistPage(p => Math.max(0, p - 1)),
         disabled: histPage === 0,
         style: {
-          background: histPage === 0 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-          color: histPage === 0 ? "#3A5A6A" : C.blue,
+          background: histPage === 0 ? C.surface : "rgba(26,111,168,0.25)",
+          color: histPage === 0 ? C.muted : C.blue,
           border: "1px solid " + (histPage === 0 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
           borderRadius: 7,
           padding: "4px 10px",
@@ -8620,8 +8620,8 @@ function App() {
         onClick: () => setHistPage(p => Math.min(pages - 1, p + 1)),
         disabled: histPage >= pages - 1,
         style: {
-          background: histPage >= pages - 1 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-          color: histPage >= pages - 1 ? "#3A5A6A" : C.blue,
+          background: histPage >= pages - 1 ? C.surface : "rgba(26,111,168,0.25)",
+          color: histPage >= pages - 1 ? C.muted : C.blue,
           border: "1px solid " + (histPage >= pages - 1 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
           borderRadius: 7,
           padding: "4px 10px",
@@ -10228,7 +10228,7 @@ function App() {
       }
     }, sel.customerComments)), sel.followUpRequired && React.createElement("div", {
       style: {
-        background: "rgba(230,146,10,0.08)",
+        background: C.surface,
         border: "1px solid " + C.accent,
         borderRadius: 12,
         padding: "14px 16px"
@@ -10535,7 +10535,7 @@ function App() {
     icon: "\uD83D\uDCCB"
   }, survey.serviceType && React.createElement("div", {
     style: {
-      background: "rgba(230,146,10,0.08)",
+      background: C.surface,
       border: "1px solid rgba(245,166,35,0.3)",
       borderRadius: 8,
       padding: "7px 12px",
@@ -10883,9 +10883,9 @@ function App() {
       onClick: () => sf("_physPage", Math.max(0, (survey._physPage || 0) - 1)),
       disabled: (survey._physPage || 0) === 0,
       style: {
-        background: (survey._physPage || 0) === 0 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-        color: (survey._physPage || 0) === 0 ? "#3A5A6A" : C.blue,
-        border: "1px solid " + ((survey._physPage || 0) === 0 ? "#1E3247" : "rgba(26,111,168,0.4)"),
+        background: (survey._physPage || 0) === 0 ? C.surface : "rgba(26,111,168,0.25)",
+        color: (survey._physPage || 0) === 0 ? C.muted : C.blue,
+        border: "1px solid " + ((survey._physPage || 0) === 0 ? C.border : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
         fontSize: 11,
@@ -10896,9 +10896,9 @@ function App() {
       onClick: () => sf("_physPage", Math.min(1, (survey._physPage || 0) + 1)),
       disabled: (survey._physPage || 0) === 1,
       style: {
-        background: (survey._physPage || 0) === 1 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-        color: (survey._physPage || 0) === 1 ? "#3A5A6A" : C.blue,
-        border: "1px solid " + ((survey._physPage || 0) === 1 ? "#1E3247" : "rgba(26,111,168,0.4)"),
+        background: (survey._physPage || 0) === 1 ? C.surface : "rgba(26,111,168,0.25)",
+        color: (survey._physPage || 0) === 1 ? C.muted : C.blue,
+        border: "1px solid " + ((survey._physPage || 0) === 1 ? C.border : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
         fontSize: 11,
@@ -11019,9 +11019,9 @@ function App() {
       onClick: () => sf("_partPage", Math.max(0, (survey._partPage || 0) - 1)),
       disabled: (survey._partPage || 0) === 0,
       style: {
-        background: (survey._partPage || 0) === 0 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-        color: (survey._partPage || 0) === 0 ? "#3A5A6A" : C.blue,
-        border: "1px solid " + ((survey._partPage || 0) === 0 ? "#1E3247" : "rgba(26,111,168,0.4)"),
+        background: (survey._partPage || 0) === 0 ? C.surface : "rgba(26,111,168,0.25)",
+        color: (survey._partPage || 0) === 0 ? C.muted : C.blue,
+        border: "1px solid " + ((survey._partPage || 0) === 0 ? C.border : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
         fontSize: 11,
@@ -11032,9 +11032,9 @@ function App() {
       onClick: () => sf("_partPage", Math.min(1, (survey._partPage || 0) + 1)),
       disabled: (survey._partPage || 0) === 1,
       style: {
-        background: (survey._partPage || 0) === 1 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-        color: (survey._partPage || 0) === 1 ? "#3A5A6A" : C.blue,
-        border: "1px solid " + ((survey._partPage || 0) === 1 ? "#1E3247" : "rgba(26,111,168,0.4)"),
+        background: (survey._partPage || 0) === 1 ? C.surface : "rgba(26,111,168,0.25)",
+        color: (survey._partPage || 0) === 1 ? C.muted : C.blue,
+        border: "1px solid " + ((survey._partPage || 0) === 1 ? C.border : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
         fontSize: 11,
@@ -11105,9 +11105,9 @@ function App() {
       onClick: () => sf("_tecPage", Math.max(0, (survey._tecPage || 0) - 1)),
       disabled: (survey._tecPage || 0) === 0,
       style: {
-        background: (survey._tecPage || 0) === 0 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-        color: (survey._tecPage || 0) === 0 ? "#3A5A6A" : C.blue,
-        border: "1px solid " + ((survey._tecPage || 0) === 0 ? "#1E3247" : "rgba(26,111,168,0.4)"),
+        background: (survey._tecPage || 0) === 0 ? C.surface : "rgba(26,111,168,0.25)",
+        color: (survey._tecPage || 0) === 0 ? C.muted : C.blue,
+        border: "1px solid " + ((survey._tecPage || 0) === 0 ? C.border : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
         fontSize: 11,
@@ -11118,9 +11118,9 @@ function App() {
       onClick: () => sf("_tecPage", Math.min(1, (survey._tecPage || 0) + 1)),
       disabled: (survey._tecPage || 0) === 1,
       style: {
-        background: (survey._tecPage || 0) === 1 ? "rgba(255,255,255,0.04)" : "rgba(26,111,168,0.25)",
-        color: (survey._tecPage || 0) === 1 ? "#3A5A6A" : C.blue,
-        border: "1px solid " + ((survey._tecPage || 0) === 1 ? "#1E3247" : "rgba(26,111,168,0.4)"),
+        background: (survey._tecPage || 0) === 1 ? C.surface : "rgba(26,111,168,0.25)",
+        color: (survey._tecPage || 0) === 1 ? C.muted : C.blue,
+        border: "1px solid " + ((survey._tecPage || 0) === 1 ? C.border : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
         fontSize: 11,
@@ -12194,7 +12194,7 @@ function App() {
       fontSize: 12,
       marginTop: 12,
       padding: "8px",
-      background: "rgba(230,146,10,0.08)",
+      background: C.surface,
       borderRadius: 8,
       border: "1px solid rgba(230,146,10,0.2)"
     }

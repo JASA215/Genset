@@ -106,14 +106,14 @@ function Pager({page,setPage,total,size,t}){
   if(pages<=1)return null;
   return<div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 4px",marginTop:8}}>
     <button onClick={()=>setPage(p=>Math.max(0,p-1))} disabled={page===0}
-      style={{background:page===0?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.2)",color:page===0?"#3A5A6A":"#1A6FA8",border:"1px solid "+(page===0?"#1E3247":"rgba(26,111,168,0.4)"),borderRadius:9,padding:"8px 16px",fontWeight:700,cursor:page===0?"not-allowed":"pointer",fontSize:13}}>
+      style={{background:page===0?C.surface:"rgba(26,111,168,0.2)",color:page===0?C.muted:"#1A6FA8",border:"1px solid "+(page===0?C.border:"rgba(26,111,168,0.4)"),borderRadius:9,padding:"8px 16px",fontWeight:700,cursor:page===0?"not-allowed":"pointer",fontSize:13}}>
       ← {t("Prev","السابق")}
     </button>
     <span style={{color:"#7D8F9E",fontSize:12}}>
       {t("Page","صفحة")} {page+1} / {pages} &nbsp;·&nbsp; {total} {t("total","إجمالي")}
     </span>
     <button onClick={()=>setPage(p=>Math.min(pages-1,p+1))} disabled={page>=pages-1}
-      style={{background:page>=pages-1?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.2)",color:page>=pages-1?"#3A5A6A":"#1A6FA8",border:"1px solid "+(page>=pages-1?"#1E3247":"rgba(26,111,168,0.4)"),borderRadius:9,padding:"8px 16px",fontWeight:700,cursor:page>=pages-1?"not-allowed":"pointer",fontSize:13}}>
+      style={{background:page>=pages-1?C.surface:"rgba(26,111,168,0.2)",color:page>=pages-1?C.muted:"#1A6FA8",border:"1px solid "+(page>=pages-1?C.border:"rgba(26,111,168,0.4)"),borderRadius:9,padding:"8px 16px",fontWeight:700,cursor:page>=pages-1?"not-allowed":"pointer",fontSize:13}}>
       {t("Next","التالي")} →
     </button>
   </div>;
@@ -920,9 +920,9 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
             {pages>1&&<div style={{display:"flex",alignItems:"center",gap:6}}>
               <span style={{color:C.muted,fontSize:11}}>{reqPage+1}/{pages}</span>
               <button onClick={()=>setReqPage(p=>Math.max(0,p-1))} disabled={reqPage===0}
-                style={{background:reqPage===0?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:reqPage===0?"#3A5A6A":C.blue,border:"1px solid "+(reqPage===0?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:reqPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
+                style={{background:reqPage===0?C.surface:"rgba(26,111,168,0.25)",color:reqPage===0?C.muted:C.blue,border:"1px solid "+(reqPage===0?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:reqPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
               <button onClick={()=>setReqPage(p=>Math.min(pages-1,p+1))} disabled={reqPage>=pages-1}
-                style={{background:reqPage>=pages-1?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:reqPage>=pages-1?"#3A5A6A":C.blue,border:"1px solid "+(reqPage>=pages-1?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:reqPage>=pages-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
+                style={{background:reqPage>=pages-1?C.surface:"rgba(26,111,168,0.25)",color:reqPage>=pages-1?C.muted:C.blue,border:"1px solid "+(reqPage>=pages-1?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:reqPage>=pages-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
             </div>}
           </div>;
         })()}
@@ -1313,7 +1313,7 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
         </div>}
 
         {engineModelsList.length>0&&<div style={{background:C.card,border:"1px solid "+C.border,borderRadius:12,overflow:"hidden"}}>
-          <div style={{background:"rgba(230,146,10,0.08)",padding:"10px 14px",borderBottom:"1px solid "+C.border,display:"grid",gridTemplateColumns:"1fr 1fr 1.5fr auto",gap:8}}>
+          <div style={{background:C.surface,padding:"10px 14px",borderBottom:"1px solid "+C.border,display:"grid",gridTemplateColumns:"1fr 1fr 1.5fr auto",gap:8}}>
             <div style={{color:C.accent,fontSize:11,fontWeight:800}}>{t("CAPACITY","السعة")}</div>
             <div style={{color:C.accent,fontSize:11,fontWeight:800}}>{t("BRAND","الماركة")}</div>
             <div style={{color:C.accent,fontSize:11,fontWeight:800}}>{t("MODEL","الموديل")}</div>
@@ -1643,7 +1643,7 @@ function ManagerReport({subs,branches,onBack,lang,lockedBranch=null,theme,toggle
   const[rSection,setRSection]=useState("surveys");
   const[rPage,setRPage]=useState(0);
   const MR_PAGE=15;
-  const Th=({c})=><th style={{padding:"7px 9px",textAlign:"left",color:C.accent,fontWeight:700,fontSize:11,borderBottom:"1px solid "+C.border,background:"rgba(230,146,10,0.08)"}}>{c}</th>;
+  const Th=({c})=><th style={{padding:"7px 9px",textAlign:"left",color:C.accent,fontWeight:700,fontSize:11,borderBottom:"1px solid "+C.border,background:C.surface}}>{c}</th>;
   const Td=({c,bold,color})=><td style={{padding:"6px 9px",fontSize:12,color:color||(bold?C.text:C.muted),fontWeight:bold?700:400,borderBottom:"1px solid "+C.border,background:C.card}}>{c}</td>;
 
   return<Bg dir={lang==="ar"?"rtl":"ltr"}>
@@ -1705,9 +1705,9 @@ function ManagerReport({subs,branches,onBack,lang,lockedBranch=null,theme,toggle
           {n>MR_PAGE&&<div style={{display:"flex",alignItems:"center",gap:6}}>
             <span style={{color:C.muted,fontSize:11}}>{t("Page","صفحة")} {rPage+1}/{Math.ceil(n/MR_PAGE)}</span>
             <button onClick={()=>setRPage(p=>Math.max(0,p-1))} disabled={rPage===0}
-              style={{background:rPage===0?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:rPage===0?"#3A5A6A":C.blue,border:"1px solid "+(rPage===0?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"3px 10px",fontSize:11,fontWeight:700,cursor:rPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
+              style={{background:rPage===0?C.surface:"rgba(26,111,168,0.25)",color:rPage===0?C.muted:C.blue,border:"1px solid "+(rPage===0?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"3px 10px",fontSize:11,fontWeight:700,cursor:rPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
             <button onClick={()=>setRPage(p=>Math.min(Math.ceil(n/MR_PAGE)-1,p+1))} disabled={rPage>=Math.ceil(n/MR_PAGE)-1}
-              style={{background:rPage>=Math.ceil(n/MR_PAGE)-1?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:rPage>=Math.ceil(n/MR_PAGE)-1?"#3A5A6A":C.blue,border:"1px solid "+(rPage>=Math.ceil(n/MR_PAGE)-1?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"3px 10px",fontSize:11,fontWeight:700,cursor:rPage>=Math.ceil(n/MR_PAGE)-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
+              style={{background:rPage>=Math.ceil(n/MR_PAGE)-1?C.surface:"rgba(26,111,168,0.25)",color:rPage>=Math.ceil(n/MR_PAGE)-1?C.muted:C.blue,border:"1px solid "+(rPage>=Math.ceil(n/MR_PAGE)-1?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"3px 10px",fontSize:11,fontWeight:700,cursor:rPage>=Math.ceil(n/MR_PAGE)-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
           </div>}
         </div>
         {n===0?<div style={{color:C.muted,padding:"16px 0",marginBottom:16}}>{t("No surveys in this period.","لا توجد فحوصات.")}</div>:(
@@ -1785,10 +1785,10 @@ function ManagerReport({subs,branches,onBack,lang,lockedBranch=null,theme,toggle
         ))}</div>
         {/* Low scoring within CSAT tab */}
         {low.length>0&&<div>
-          <div style={{background:"rgba(207,32,38,0.08)",borderLeft:"3px solid "+C.red,borderRadius:8,padding:"9px 14px",marginBottom:8}}><span style={{fontWeight:700,fontSize:14,color:C.red}}>⚠️ {t("Needs Attention","تحتاج اهتمام")} ({low.length})</span></div>
+          <div style={{background:C.surface,borderLeft:"3px solid "+C.red,borderRadius:8,padding:"9px 14px",marginBottom:8}}><span style={{fontWeight:700,fontSize:14,color:C.red}}>⚠️ {t("Needs Attention","تحتاج اهتمام")} ({low.length})</span></div>
           <div style={{overflowX:"auto",marginBottom:8}}>
             <table style={{width:"100%",borderCollapse:"collapse"}}>
-              <thead><tr>{[t("Customer","العميل"),t("Branch","الفرع"),t("Date","التاريخ"),t("Score","التقييم"),t("Issues","المشكلات")].map(h=><th key={h} style={{padding:"7px 9px",textAlign:"left",color:C.red,fontWeight:700,fontSize:11,borderBottom:"1px solid "+C.border,background:"rgba(207,32,38,0.08)"}}>{h}</th>)}</tr></thead>
+              <thead><tr>{[t("Customer","العميل"),t("Branch","الفرع"),t("Date","التاريخ"),t("Score","التقييم"),t("Issues","المشكلات")].map(h=><th key={h} style={{padding:"7px 9px",textAlign:"left",color:C.red,fontWeight:700,fontSize:11,borderBottom:"1px solid "+C.border,background:C.surface}}>{h}</th>)}</tr></thead>
               <tbody>{low.slice(rPage*MR_PAGE,(rPage+1)*MR_PAGE).map(s=><tr key={s.id}><Td c={s.customerName||"-"} bold/><Td c={s.branch||"-"}/><Td c={fmtD(s.date)}/><Td c={ovs(s)} color={C.red} bold/><Td c={s.issues||"-"}/></tr>)}</tbody>
             </table>
           </div>
@@ -2211,7 +2211,7 @@ function StatisticsReport({subs,branches,user,onBack,lang,lockedBranch=null,them
               <div style={{overflowX:"auto"}}>
                 <table style={{width:"100%",borderCollapse:"collapse"}}>
                   <thead><tr>
-                    {[t("Month","الشهر"),t("Surveys","فحوصات"),t("Avg Score","متوسط التقييم"),t("Status","الحالة")].map(h=><th key={h} style={{padding:"7px 10px",textAlign:"left",color:C.accent,fontWeight:700,fontSize:11,borderBottom:"1px solid "+C.border,background:"rgba(230,146,10,0.08)"}}>{h}</th>)}
+                    {[t("Month","الشهر"),t("Surveys","فحوصات"),t("Avg Score","متوسط التقييم"),t("Status","الحالة")].map(h=><th key={h} style={{padding:"7px 10px",textAlign:"left",color:C.accent,fontWeight:700,fontSize:11,borderBottom:"1px solid "+C.border,background:C.surface}}>{h}</th>)}
                   </tr></thead>
                   <tbody>{monthlyData.map((m,i)=>{
                     const prev=monthlyData[i-1];
@@ -2616,7 +2616,7 @@ function App(){
         </div>
 
         {/* Follow-up pending banner */}
-        {pendFU.length>0&&<div onClick={()=>setView("followups")} style={{background:"rgba(230,146,10,0.08)",border:"1px solid "+C.accent,borderRadius:12,padding:"12px 16px",marginBottom:12,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        {pendFU.length>0&&<div onClick={()=>setView("followups")} style={{background:C.card,border:"2px solid "+C.accent,borderRadius:12,padding:"12px 16px",marginBottom:12,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <div><div style={{fontWeight:800,color:C.accent,fontSize:14}}>🔔 {pendFU.length} {t("Follow-Ups Pending","متابعات معلقة")}</div><div style={{color:C.muted,fontSize:12}}>{t("Tap to review","اضغط للمراجعة")}</div></div>
           <span style={{color:C.accent,fontSize:22}}>›</span>
         </div>}
@@ -2629,7 +2629,7 @@ function App(){
           </div>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
             {(isManager||isBranchManager)&&<SBtn full onClick={()=>setView("dashboard")}>📊 {t("Dashboard","لوحة التحكم")}</SBtn>}
-            {(isManager||isBranchManager)&&subs.filter(s=>(s.approvalStatus==="pending"||s.approvalStatus==="pending_admin"||s.approvalStatus==="pending_manager")&&(isAdmin||!userBranch||s.branch===userBranch)).length>0&&<div onClick={()=>setView("history")} style={{background:"rgba(155,89,182,0.1)",border:"1px solid rgba(155,89,182,0.35)",borderRadius:13,padding:"14px 18px",cursor:"pointer"}}>
+            {(isManager||isBranchManager)&&subs.filter(s=>(s.approvalStatus==="pending"||s.approvalStatus==="pending_admin"||s.approvalStatus==="pending_manager")&&(isAdmin||!userBranch||s.branch===userBranch)).length>0&&<div onClick={()=>setView("history")} style={{background:C.card,border:"2px solid rgba(155,89,182,0.6)",borderRadius:13,padding:"14px 18px",cursor:"pointer"}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                 <div>
                   <div style={{fontWeight:800,color:"#9B59B6",fontSize:13}}>⏳ {subs.filter(s=>(s.approvalStatus==="pending"||s.approvalStatus==="pending_admin"||s.approvalStatus==="pending_manager")&&(isAdmin||!userBranch||s.branch===userBranch)).length} {t("Pending Approval","بانتظار الموافقة")}</div>
@@ -2721,9 +2721,9 @@ function App(){
           {pages>1&&<div style={{display:"flex",alignItems:"center",gap:6}}>
             <span style={{color:C.muted,fontSize:11}}>{histPage+1}/{pages}</span>
             <button onClick={()=>setHistPage(p=>Math.max(0,p-1))} disabled={histPage===0}
-              style={{background:histPage===0?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:histPage===0?"#3A5A6A":C.blue,border:"1px solid "+(histPage===0?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:histPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
+              style={{background:histPage===0?C.surface:"rgba(26,111,168,0.25)",color:histPage===0?C.muted:C.blue,border:"1px solid "+(histPage===0?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:histPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
             <button onClick={()=>setHistPage(p=>Math.min(pages-1,p+1))} disabled={histPage>=pages-1}
-              style={{background:histPage>=pages-1?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:histPage>=pages-1?"#3A5A6A":C.blue,border:"1px solid "+(histPage>=pages-1?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:histPage>=pages-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
+              style={{background:histPage>=pages-1?C.surface:"rgba(26,111,168,0.25)",color:histPage>=pages-1?C.muted:C.blue,border:"1px solid "+(histPage>=pages-1?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:histPage>=pages-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
           </div>}
         </div>;
       })()}
@@ -3102,7 +3102,7 @@ function App(){
     </Card>
     {sel.issues&&<Card title={t("Issues Noted","المشكلات")} icon="⚠️" accent={C.red}><p style={{margin:0,fontSize:14,lineHeight:1.6}}>{sel.issues}</p></Card>}
     {sel.customerComments&&<Card title={t("Customer Comments","تعليقات العميل")} icon="💬"><p style={{margin:0,fontSize:14,lineHeight:1.6}}>{sel.customerComments}</p></Card>}
-    {sel.followUpRequired&&<div style={{background:"rgba(230,146,10,0.08)",border:"1px solid "+C.accent,borderRadius:12,padding:"14px 16px"}}>
+    {sel.followUpRequired&&<div style={{background:C.surface,border:"1px solid "+C.accent,borderRadius:12,padding:"14px 16px"}}>
       <div style={{fontWeight:800,color:C.accent,marginBottom:4}}>🔔 {t("Follow-Up","متابعة")} {sel.followUpDone?t("— DONE ✅","— تم ✅"):""}</div>
       {sel.followUpDate&&<div style={{color:C.muted,fontSize:13}}>{t("Date:","التاريخ:")} <strong style={{color:C.text}}>{fmtD(sel.followUpDate)}</strong></div>}
       {sel.followUpNotes&&<div style={{color:C.muted,fontSize:13,marginTop:4}}>{t("Action:","الإجراء:")} <strong style={{color:C.text}}>{sel.followUpNotes}</strong></div>}
@@ -3185,7 +3185,7 @@ function App(){
 
       <Card title={t("Job Information","معلومات المهمة")} titleAr={lang==="en"?"معلومات المهمة":undefined} icon="📋">
       {/* Selected service type badge */}
-      {survey.serviceType&&<div style={{background:"rgba(230,146,10,0.08)",border:"1px solid rgba(245,166,35,0.3)",borderRadius:8,padding:"7px 12px",marginBottom:12,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+      {survey.serviceType&&<div style={{background:C.surface,border:"1px solid rgba(245,166,35,0.3)",borderRadius:8,padding:"7px 12px",marginBottom:12,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
         <span style={{color:C.accent,fontSize:13,fontWeight:700}}>⚡ {survey.serviceType}</span>
         <button onClick={()=>setView("servicetype")} style={{background:"none",border:"none",color:C.muted,fontSize:11,cursor:"pointer",textDecoration:"underline"}}>{t("Change","تغيير")}</button>
       </div>}
@@ -3289,9 +3289,9 @@ function App(){
       headerExtra={<div style={{display:"flex",alignItems:"center",gap:8}}>
         <span style={{color:C.muted,fontSize:11,fontWeight:600}}>{t("Page","صفحة")} {(survey._physPage||0)+1}/2</span>
         <button onClick={()=>sf("_physPage",Math.max(0,(survey._physPage||0)-1))} disabled={(survey._physPage||0)===0}
-          style={{background:(survey._physPage||0)===0?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:(survey._physPage||0)===0?"#3A5A6A":C.blue,border:"1px solid "+((survey._physPage||0)===0?"#1E3247":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._physPage||0)===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
+          style={{background:(survey._physPage||0)===0?C.surface:"rgba(26,111,168,0.25)",color:(survey._physPage||0)===0?C.muted:C.blue,border:"1px solid "+((survey._physPage||0)===0?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._physPage||0)===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
         <button onClick={()=>sf("_physPage",Math.min(1,(survey._physPage||0)+1))} disabled={(survey._physPage||0)===1}
-          style={{background:(survey._physPage||0)===1?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:(survey._physPage||0)===1?"#3A5A6A":C.blue,border:"1px solid "+((survey._physPage||0)===1?"#1E3247":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._physPage||0)===1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
+          style={{background:(survey._physPage||0)===1?C.surface:"rgba(26,111,168,0.25)",color:(survey._physPage||0)===1?C.muted:C.blue,border:"1px solid "+((survey._physPage||0)===1?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._physPage||0)===1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
       </div>}>
       {PHY.slice((survey._physPage||0)===0?0:4,(survey._physPage||0)===0?4:8).map(([k,en,ar])=><div key={k} style={{marginBottom:16}}>
         <div style={{marginBottom:6}}>
@@ -3323,9 +3323,9 @@ function App(){
       headerExtra={<div style={{display:"flex",alignItems:"center",gap:8}}>
         <span style={{color:C.muted,fontSize:11,fontWeight:600}}>{t("Page","صفحة")} {(survey._partPage||0)+1}/2</span>
         <button onClick={()=>sf("_partPage",Math.max(0,(survey._partPage||0)-1))} disabled={(survey._partPage||0)===0}
-          style={{background:(survey._partPage||0)===0?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:(survey._partPage||0)===0?"#3A5A6A":C.blue,border:"1px solid "+((survey._partPage||0)===0?"#1E3247":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._partPage||0)===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
+          style={{background:(survey._partPage||0)===0?C.surface:"rgba(26,111,168,0.25)",color:(survey._partPage||0)===0?C.muted:C.blue,border:"1px solid "+((survey._partPage||0)===0?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._partPage||0)===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
         <button onClick={()=>sf("_partPage",Math.min(1,(survey._partPage||0)+1))} disabled={(survey._partPage||0)===1}
-          style={{background:(survey._partPage||0)===1?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:(survey._partPage||0)===1?"#3A5A6A":C.blue,border:"1px solid "+((survey._partPage||0)===1?"#1E3247":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._partPage||0)===1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
+          style={{background:(survey._partPage||0)===1?C.surface:"rgba(26,111,168,0.25)",color:(survey._partPage||0)===1?C.muted:C.blue,border:"1px solid "+((survey._partPage||0)===1?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._partPage||0)===1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
       </div>}>
       <div style={{marginBottom:12,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
         <span style={{color:C.muted,fontSize:13}}>{t("Completed:","المنجز:")} <strong style={{color:C.text}}>{dc(survey.parts)}</strong> / {PRT.length}</span>
@@ -3342,9 +3342,9 @@ function App(){
       headerExtra={<div style={{display:"flex",alignItems:"center",gap:8}}>
         <span style={{color:C.muted,fontSize:11,fontWeight:600}}>{t("Page","صفحة")} {(survey._tecPage||0)+1}/2</span>
         <button onClick={()=>sf("_tecPage",Math.max(0,(survey._tecPage||0)-1))} disabled={(survey._tecPage||0)===0}
-          style={{background:(survey._tecPage||0)===0?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:(survey._tecPage||0)===0?"#3A5A6A":C.blue,border:"1px solid "+((survey._tecPage||0)===0?"#1E3247":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._tecPage||0)===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
+          style={{background:(survey._tecPage||0)===0?C.surface:"rgba(26,111,168,0.25)",color:(survey._tecPage||0)===0?C.muted:C.blue,border:"1px solid "+((survey._tecPage||0)===0?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._tecPage||0)===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
         <button onClick={()=>sf("_tecPage",Math.min(1,(survey._tecPage||0)+1))} disabled={(survey._tecPage||0)===1}
-          style={{background:(survey._tecPage||0)===1?"rgba(255,255,255,0.04)":"rgba(26,111,168,0.25)",color:(survey._tecPage||0)===1?"#3A5A6A":C.blue,border:"1px solid "+((survey._tecPage||0)===1?"#1E3247":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._tecPage||0)===1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
+          style={{background:(survey._tecPage||0)===1?C.surface:"rgba(26,111,168,0.25)",color:(survey._tecPage||0)===1?C.muted:C.blue,border:"1px solid "+((survey._tecPage||0)===1?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:(survey._tecPage||0)===1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
       </div>}>
       {TEC.slice((survey._tecPage||0)===0?0:4,(survey._tecPage||0)===0?4:8).map(([k,en,ar])=><div key={k} style={{marginBottom:16}}>
         <div style={{marginBottom:6}}><span style={{color:C.muted,fontSize:11,fontWeight:600,textTransform:"uppercase",letterSpacing:0.4}}>{en}</span><span style={{color:C.muted,fontSize:11,marginLeft:6}}>/ {ar}</span></div>
@@ -3645,7 +3645,7 @@ function App(){
 
     {(survey.serviceType==="Preventive Maintenance"||!survey.serviceType)&&(
       (step===1&&(survey._physPage||0)===0)||(step===3&&(survey._partPage||0)===0)||(step===4&&(survey._tecPage||0)===0)
-    )?<div style={{textAlign:"center",color:C.muted,fontSize:12,marginTop:12,padding:"8px",background:"rgba(230,146,10,0.08)",borderRadius:8,border:"1px solid rgba(230,146,10,0.2)"}}>
+    )?<div style={{textAlign:"center",color:C.muted,fontSize:12,marginTop:12,padding:"8px",background:C.surface,borderRadius:8,border:"1px solid rgba(230,146,10,0.2)"}}>
       👆 {t("Complete this page then tap Next →","أكمل هذه الصفحة ثم اضغط التالي →")}
     </div>:<div style={{display:"flex",gap:10,marginTop:16}}>
       {step>0&&<SBtn flex onClick={()=>setStep(step-1)}>&#8592; {t("Back","رجوع")}</SBtn>}
