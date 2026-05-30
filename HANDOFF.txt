@@ -1,44 +1,66 @@
 Continue developing my GenSet Aftersales app.
 
-• Live URL: https://jasa215.github.io/Genset
-• Firebase project: genset-68a85
+• Live URL (NEW custom domain): https://jsgensets-aftersales.com
+  (old https://jasa215.github.io/Genset still redirects here)
+• Domain registrar + DNS: Cloudflare (free plan). 4 A records (185.199.108-111.153)
+  + www CNAME -> jasa215.github.io, all set to "DNS only" (grey cloud).
+  GitHub Pages: custom domain set, HTTPS enforced.
+• Firebase project: genset-68a85 (Spark / free plan)
 • Current version: v20260530030000
 
 ARCHITECTURE (app is precompiled — no in-browser Babel):
-• app.src.jsx   ← THE WORKING FILE. Editable React/JSX source. Edit this.
-• shell.html    ← HTML skeleton with <!--REACT--> and <!--APP--> markers.
-• build.js      ← compiles app.src.jsx + inlines React → index.html.
-• index.html    ← GENERATED, deploy-only. Do NOT hand-edit.
-• icon-120/152/167/180.png ← iPad/iPhone home-screen icons.
-• icon-192/512.png + manifest.json ← Android/Chrome home-screen install.
+• app.src.jsx   <- THE WORKING FILE. Editable React/JSX source. Edit this.
+• shell.html    <- HTML skeleton with <!--REACT--> and <!--APP--> markers.
+• build.js      <- compiles app.src.jsx + inlines React -> index.html.
+• index.html    <- GENERATED, deploy-only. Do NOT hand-edit.
+• icon-120/152/167/180.png <- iPad/iPhone home-screen icons.
+• icon-192/512.png + manifest.json <- Android/Chrome home-screen install.
 
-All of the above are committed to the repo root on the `main` branch,
-so source can be recovered with:
+Recover source from repo (filesystem/transcript do NOT persist between sessions):
   curl -sL https://raw.githubusercontent.com/jasa215/Genset/main/app.src.jsx
-  curl -sL https://raw.githubusercontent.com/jasa215/Genset/main/shell.html
-  curl -sL https://raw.githubusercontent.com/jasa215/Genset/main/build.js
-(The sandbox filesystem and transcript do NOT persist between sessions —
-always recover source from the repo first.)
+  (also shell.html, build.js, HANDOFF.txt)
 
-BUILD STEP (run after editing app.src.jsx):
+BUILD STEP (after editing app.src.jsx):
   npm install react@18 react-dom@18 @babel/core @babel/preset-react
   node build.js
-Before building, bump the version stamp in shell.html (the <!-- v... -->
-comment AND the watchdog APP_VERSION). After building, validate the
-compiled app (node --check on the final <script>) before deploying.
+Bump version stamp in shell.html (comment + watchdog APP_VERSION) before build.
+Validate compiled app (node --check on final <script>) before deploying.
+DEPLOY: upload index.html + all icons + manifest.json to repo root on main.
 
-Runtime deps: Firebase from gstatic (required at boot); xlsx is deferred
-(export only, never blocks startup); React is inlined; Babel is gone.
-A boot self-check (showBootError / window.__BOOTED) shows a visible error
-screen instead of a silent infinite "Loading…".
+SECURITY STATUS (done today):
+• Firestore rules: changed from wide-open (allow if true) to require login,
+  with a targeted exception so login works:
+    - users/{u}: read allowed (login looks up username->email pre-auth);
+      create/update/delete require auth.
+    - failedLogins/{f}: read+create allowed (pre-auth attempt counter);
+      update/delete require auth.
+    - everything else (customers, surveys, technicians, branches, sessions,
+      notifications, changeRequests, engineModels): read+write require auth.
 
-DEPLOY: upload index.html + ALL icon-*.png (120/152/167/180/192/512) +
-manifest.json to repo root on main.
+OUTSTANDING SECURITY / FIX ITEMS (not done yet):
+1. HARDCODED ADMIN PASSWORD in app.src.jsx (~line 583): Excel-import signs in as
+   admin@genset-app.com / "admin123" — visible in the PUBLIC repo. Change the
+   admin password AND remove it from code. HIGH PRIORITY.
+2. OLD plain-text passwords in some users/{uid} docs (e.g. sup.egypt "Egypt123").
+   Current addUser code strips passwords correctly, but old docs still have them
+   and users collection is publicly readable. Delete the password field from old
+   user docs.
+3. ROLE-BASED rules (next layer): roles live in users/{uid}.role
+   (admin/manager/branch_manager/supervisor) + .branch. Lock collections per role
+   so non-admins can't reach admin-only data even by bypassing the app UI.
+4. SESSION single-device bug: sessions/{userDocId} only cleared on proper logout
+   (app.src.jsx ~2338/2396). Closing app without logout leaves stale session ->
+   "already logged in on another device". Add stale-session timeout using the
+   lastSeen field (e.g. ignore sessions older than 15 min).
+5. IN-APP password change is BROKEN: edit-user writes password to Firestore but
+   does NOT change Firebase Auth password (so login password never changes) and
+   re-introduces plain-text. Either remove the field or build a proper admin
+   set-password Cloud Function (requires Blaze plan + credit card + budget alert).
 
 DOMAIN RULES:
 • Roles: admin / manager / branch_manager / supervisor
 • 5 service types: PM / CM / PDI / WC / CC
-• Warranty 3-step approval: supervisor → admin (WC#) → branch manager →
+• Warranty 3-step approval: supervisor -> admin (WC#) -> branch manager ->
   supervisor marks Done
 • Only PM counts for branch/tech scores
 • Closure requires: quotation / warranty / invoice / work order / manager approval
