@@ -3410,13 +3410,13 @@ function App(){
       <div style={{padding:"8px 12px",background:"rgba(245,166,35,0.07)",borderRadius:9,border:"1px solid rgba(245,166,35,0.2)",marginBottom:14,fontSize:12,color:C.muted}}>
         ℹ️ {t("Fill technical scores manually. These count toward tech/branch performance only for tech-caused defects.","املأ التقييم التقني يدوياً. يُحتسب لأداء الفني/الفرع فقط في حالات العيوب التقنية.")}
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}}>
+      <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:14}}>
         {[["physical",t("Physical","الخارجي")],["engine",t("Engine","المحرك")],["tech",t("Technician","الفني")]].map(([k,lbl])=>(
           <div key={k} style={{background:C.surface,borderRadius:10,padding:"10px 12px",border:"1px solid "+C.border}}>
             <div style={{color:C.muted,fontSize:11,fontWeight:700,textTransform:"uppercase",marginBottom:6}}>{lbl}</div>
-            <div style={{display:"flex",gap:3}}>
+            <div style={{display:"flex",gap:6}}>
               {[1,2,3,4,5].map(n=><button key={n} onClick={()=>sf("scores."+k,n)}
-                style={{width:28,height:28,borderRadius:6,border:"1px solid "+(survey.scores[k]>=n?C.accent:C.border),background:survey.scores[k]>=n?"linear-gradient(135deg,#D4820A,#B56A08)":"transparent",color:survey.scores[k]>=n?"#fff":C.muted,fontWeight:700,fontSize:12,cursor:"pointer"}}>{n}</button>)}
+                style={{flex:1,height:36,borderRadius:8,border:"1px solid "+(survey.scores[k]>=n?C.accent:C.border),background:survey.scores[k]>=n?"linear-gradient(135deg,#D4820A,#B56A08)":"transparent",color:survey.scores[k]>=n?"#fff":C.muted,fontWeight:700,fontSize:14,cursor:"pointer"}}>{n}</button>)}
             </div>
           </div>
         ))}

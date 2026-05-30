@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530050000 -->
+<!-- v20260530060000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530050000";
+  var APP_VERSION="v20260530060000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -11338,8 +11338,8 @@ function App() {
     }
   }, "\u2139\uFE0F ", t("Fill technical scores manually. These count toward tech/branch performance only for tech-caused defects.", "املأ التقييم التقني يدوياً. يُحتسب لأداء الفني/الفرع فقط في حالات العيوب التقنية.")), React.createElement("div", {
     style: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
+      display: "flex",
+      flexDirection: "column",
       gap: 10,
       marginBottom: 14
     }
@@ -11362,20 +11362,20 @@ function App() {
   }, lbl), React.createElement("div", {
     style: {
       display: "flex",
-      gap: 3
+      gap: 6
     }
   }, [1, 2, 3, 4, 5].map(n => React.createElement("button", {
     key: n,
     onClick: () => sf("scores." + k, n),
     style: {
-      width: 28,
-      height: 28,
-      borderRadius: 6,
+      flex: 1,
+      height: 36,
+      borderRadius: 8,
       border: "1px solid " + (survey.scores[k] >= n ? C.accent : C.border),
       background: survey.scores[k] >= n ? "linear-gradient(135deg,#D4820A,#B56A08)" : "transparent",
       color: survey.scores[k] >= n ? "#fff" : C.muted,
       fontWeight: 700,
-      fontSize: 12,
+      fontSize: 14,
       cursor: "pointer"
     }
   }, n))))), React.createElement("div", {
