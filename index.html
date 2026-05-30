@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530080000 -->
+<!-- v20260530090000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530080000";
+  var APP_VERSION="v20260530090000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -429,7 +429,7 @@ const LIGHT = {
   red: "#B53025",
   yellow: "#9A7010",
   text: "#1A2332",
-  muted: "#2E4050",
+  muted: "#1E3040",
   blue: "#1558A8"
 };
 let C = DARK;
@@ -10626,7 +10626,9 @@ function App() {
       setShowDrop(true);
     },
     onFocus: () => setShowDrop(true),
-    onBlur: () => setTimeout(() => setShowDrop(false), 200),
+    onBlur: () => setTimeout(() => {
+      if (!window._dropTouching) setShowDrop(false);
+    }, 300),
     placeholder: t("Search customer...", "البحث عن عميل..."),
     style: {
       width: "100%",
@@ -10656,7 +10658,14 @@ function App() {
     }
   }, dropCusts.map(c => React.createElement("div", {
     key: c.id,
-    onClick: () => fillCust(c),
+    onMouseDown: e => e.preventDefault(),
+    onTouchStart: () => {
+      window._dropTouching = true;
+    },
+    onClick: () => {
+      window._dropTouching = false;
+      fillCust(c);
+    },
     style: {
       padding: "10px 14px",
       cursor: "pointer",

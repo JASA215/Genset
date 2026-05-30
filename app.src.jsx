@@ -25,7 +25,7 @@ const DARK={
 const LIGHT={
   bg:"#F0F4F8",surface:"rgba(255,255,255,0.98)",card:"rgba(255,255,255,1)",
   border:"#C8D4DF",accent:"#C97A08",green:"#1A7A2E",red:"#B53025",
-  yellow:"#9A7010",text:"#1A2332",muted:"#2E4050",blue:"#1558A8"
+  yellow:"#9A7010",text:"#1A2332",muted:"#1E3040",blue:"#1558A8"
 };
 let C=DARK;
 function applyTheme(t){
@@ -3208,9 +3208,9 @@ function App(){
       {filteredCusts.length>0&&<div style={{marginBottom:16,padding:"12px 14px",background:"rgba(245,166,35,0.07)",border:"1px solid rgba(245,166,35,0.3)",borderRadius:10}}>
         <div style={{color:C.accent,fontWeight:700,fontSize:12,marginBottom:8}}>👥 {t("Auto-fill from Customer Database","تعبئة تلقائية من قاعدة البيانات")}</div>
         <div style={{position:"relative"}}>
-          <input value={cs} onChange={e=>{setCs(e.target.value);setShowDrop(true);}} onFocus={()=>setShowDrop(true)} onBlur={()=>setTimeout(()=>setShowDrop(false),200)} placeholder={t("Search customer...","البحث عن عميل...")} style={{width:"100%",background:C.bg,border:"1px solid "+C.accent,borderRadius:8,color:C.text,padding:"10px 12px",fontSize:14,outline:"none",boxSizing:"border-box"}}/>
+          <input value={cs} onChange={e=>{setCs(e.target.value);setShowDrop(true);}} onFocus={()=>setShowDrop(true)} onBlur={()=>setTimeout(()=>{if(!window._dropTouching)setShowDrop(false);},300)} placeholder={t("Search customer...","البحث عن عميل...")} style={{width:"100%",background:C.bg,border:"1px solid "+C.accent,borderRadius:8,color:C.text,padding:"10px 12px",fontSize:14,outline:"none",boxSizing:"border-box"}}/>
           {showDrop&&dropCusts.length>0&&<div style={{position:"absolute",top:"100%",left:0,right:0,zIndex:200,background:C.card,border:"1px solid "+C.border,borderRadius:8,boxShadow:"0 8px 24px rgba(0,0,0,0.6)",marginTop:4,maxHeight:200,overflowY:"auto"}}>
-            {dropCusts.map(c=><div key={c.id} onClick={()=>fillCust(c)} style={{padding:"10px 14px",cursor:"pointer",borderBottom:"1px solid "+C.border}}>
+            {dropCusts.map(c=><div key={c.id} onMouseDown={e=>e.preventDefault()} onTouchStart={()=>{window._dropTouching=true;}} onClick={()=>{window._dropTouching=false;fillCust(c);}} style={{padding:"10px 14px",cursor:"pointer",borderBottom:"1px solid "+C.border}}>
               <div style={{fontWeight:600,fontSize:13,color:C.text}}>{c.customerName}</div>
               <div style={{fontSize:11,color:C.muted}}>{c.siteLocation}{c.generatorModel?" · "+c.generatorModel:""}</div>
             </div>)}
