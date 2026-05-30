@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530030000 -->
+<!-- v20260530040000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530030000";
+  var APP_VERSION="v20260530040000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -679,7 +679,13 @@ function blank() {
     issues: "",
     followUpRequired: false,
     followUpDate: "",
-    followUpNotes: ""
+    followUpNotes: "",
+    scores: {
+      physical: 0,
+      engine: 0,
+      tech: 0,
+      csat: 0
+    }
   };
 }
 function parseCust(rows) {
@@ -7697,10 +7703,11 @@ function App() {
       alert(t("Please select a branch before submitting", "يرجى اختيار الفرع قبل الإرسال"));
       return;
     }
-    const ph = avg(survey.physical),
-      en_ = avg(survey.engine),
-      te = avg(survey.tech),
-      csat = avg(survey.csat);
+    const isCM = survey.serviceType === "Corrective Maintenance";
+    const ph = isCM ? survey.scores.physical : avg(survey.physical);
+    const en_ = isCM ? survey.scores.engine : avg(survey.engine);
+    const te = isCM ? survey.scores.tech : avg(survey.tech);
+    const csat = isCM ? survey.scores.csat : avg(survey.csat);
     const isWarranty = survey.serviceType === "Warranty Claim";
     const needsApproval = (isSupervisor || isBranchManager) && !isAdmin && ["Corrective Maintenance", "PDI Inspection", "Warranty Claim", "Customer Complaint"].includes(survey.serviceType);
     const initStatus = needsApproval ? isWarranty ? "pending_admin" : "pending" : "approved";
@@ -12177,7 +12184,20 @@ function App() {
     flex: true,
     onClick: () => setStep(step - 1)
   }, "\u2190 ", t("Back", "رجوع")), step < STEPS.length - 1 && React.createElement("button", {
-    onClick: () => setStep(step + 1),
+    onClick: () => {
+      if (survey.serviceType === "Corrective Maintenance" && step === 3) {
+        const csatVals = Object.values(survey.csat).filter(v => v > 0);
+        const csatAvg = csatVals.length > 0 ? parseFloat((csatVals.reduce((a, b) => a + b, 0) / csatVals.length).toFixed(2)) : 0;
+        setSurvey(p => ({
+          ...p,
+          scores: {
+            ...p.scores,
+            csat: csatAvg
+          }
+        }));
+      }
+      setStep(step + 1);
+    },
     style: {
       flex: 1,
       background: "linear-gradient(135deg,#F5A623,#C47B0A)",

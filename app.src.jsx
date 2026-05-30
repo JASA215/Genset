@@ -139,6 +139,8 @@ function blank(){return{
   tech:{punctuality:0,communication:0,toolsAndEquip:0,workQuality:0,safetyCompliance:0,documentationAccuracy:0,problemSolving:0,professionalism:0},
   csat:{overallSatisfaction:0,serviceTimeliness:0,technicianBehavior:0,problemResolution:0,valueForMoney:0,wouldRecommend:0},
   customerComments:"",issues:"",followUpRequired:false,followUpDate:"",followUpNotes:"",
+  // CM manual scores (Visit Assessment step — physical/engine/tech entered by user, csat auto from customer feedback)
+  scores:{physical:0,engine:0,tech:0,csat:0},
 };}
 
 function parseCust(rows){
@@ -2450,7 +2452,12 @@ function App(){
   async function submitSurvey(){
     const finalBranch=userBranch||survey.branch;
     if(!finalBranch){alert(t("Please select a branch before submitting","يرجى اختيار الفرع قبل الإرسال"));return;}
-    const ph=avg(survey.physical),en_=avg(survey.engine),te=avg(survey.tech),csat=avg(survey.csat);
+    // CM: scores entered manually in Visit Assessment. PM: computed from detailed sub-objects.
+    const isCM=survey.serviceType==="Corrective Maintenance";
+    const ph=isCM?survey.scores.physical:avg(survey.physical);
+    const en_=isCM?survey.scores.engine:avg(survey.engine);
+    const te=isCM?survey.scores.tech:avg(survey.tech);
+    const csat=isCM?survey.scores.csat:avg(survey.csat);
     // Clean entry - remove undefined/null nested objects that Firestore rejects
     const isWarranty=survey.serviceType==="Warranty Claim";
     const needsApproval=(isSupervisor||isBranchManager)&&!isAdmin&&["Corrective Maintenance","PDI Inspection","Warranty Claim","Customer Complaint"].includes(survey.serviceType);
@@ -3642,7 +3649,14 @@ function App(){
       👆 {t("Complete this page then tap Next →","أكمل هذه الصفحة ثم اضغط التالي →")}
     </div>:<div style={{display:"flex",gap:10,marginTop:16}}>
       {step>0&&<SBtn flex onClick={()=>setStep(step-1)}>&#8592; {t("Back","رجوع")}</SBtn>}
-      {step<STEPS.length-1&&<button onClick={()=>setStep(step+1)} style={{flex:1,background:"linear-gradient(135deg,#F5A623,#C47B0A)",color:"#0D0800",border:"none",borderRadius:11,padding:"14px",fontSize:15,fontWeight:900,cursor:"pointer"}}>{t("Continue","متابعة")} &#8594;</button>}
+      {step<STEPS.length-1&&<button onClick={()=>{
+        if(survey.serviceType==="Corrective Maintenance"&&step===3){
+          const csatVals=Object.values(survey.csat).filter(v=>v>0);
+          const csatAvg=csatVals.length>0?parseFloat((csatVals.reduce((a,b)=>a+b,0)/csatVals.length).toFixed(2)):0;
+          setSurvey(p=>({...p,scores:{...p.scores,csat:csatAvg}}));
+        }
+        setStep(step+1);
+      }} style={{flex:1,background:"linear-gradient(135deg,#F5A623,#C47B0A)",color:"#0D0800",border:"none",borderRadius:11,padding:"14px",fontSize:15,fontWeight:900,cursor:"pointer"}}>{t("Continue","متابعة")} &#8594;</button>}
     </div>}
   </div></Bg>;
 }
