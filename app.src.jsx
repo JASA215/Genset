@@ -305,7 +305,7 @@ function ThemeBtn({theme,onToggle}){return<button onClick={onToggle} title={them
 function SyncBanner({online,syncing,t}){
   if(syncing)return<div style={{background:"rgba(245,166,35,0.15)",border:"1px solid "+C.accent,borderRadius:8,padding:"5px 12px",marginBottom:10,fontSize:12,color:C.accent,textAlign:"center"}}>🔄 {t("Syncing...","جاري المزامنة...")}</div>;
   if(!online)return<div style={{background:"rgba(207,32,38,0.15)",border:"1px solid "+C.red,borderRadius:8,padding:"5px 12px",marginBottom:10,fontSize:12,color:C.red,textAlign:"center"}}>📵 {t("Offline","غير متصل")}</div>;
-  return<div style={{background:C===LIGHT?"rgba(26,122,46,0.12)":"rgba(46,160,67,0.12)",border:"1px solid "+C.green,borderRadius:8,padding:"5px 12px",marginBottom:10,fontSize:11,color:C.green,fontWeight:700,textAlign:"center"}}>🟢 {t("Live — all devices synced","مباشر — جميع الأجهزة متزامنة")}</div>;
+  return<div style={{background:C===LIGHT?"rgba(26,122,46,0.12)":"rgba(46,160,67,0.12)",border:"1px solid "+C.green,borderRadius:8,padding:"5px 12px",marginBottom:10,fontSize:11,color:C.text,fontWeight:700,textAlign:"center"}}>🟢 {t("Live — all devices synced","مباشر — جميع الأجهزة متزامنة")}</div>;
 }
 
 function RoleBadge({role}){
@@ -399,7 +399,7 @@ function LoginScreen({onLogin,lang,onLangToggle,theme,toggleTheme}){
       <div style={{textAlign:"center",marginBottom:32}}>
         <div style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:80,height:80,borderRadius:"50%",background:"linear-gradient(135deg,#F5A623,#C47B0A)",boxShadow:"0 0 36px rgba(245,166,35,0.5)",fontSize:36,marginBottom:16}}>⚡</div>
         <h1 style={{margin:0,fontSize:24,fontWeight:900}}>GenSet Aftersales</h1>
-        <p style={{margin:"8px 0 0",color:C.muted,fontSize:13}}>{t("Diesel Generator Inspection System","نظام فحص المولدات الديزل")}</p>
+        <p style={{margin:"8px 0 0",color:C.text,fontSize:13,fontWeight:500}}>{t("Diesel Generator Inspection System","نظام فحص المولدات الديزل")}</p>
       </div>
 
       <div style={{background:C.card,border:"1px solid "+C.border,borderRadius:16,padding:"24px 20px"}}>
@@ -2588,7 +2588,7 @@ function App(){
         <div style={{padding:"16px 0 16px",textAlign:"center"}}>
           <div style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:74,height:74,borderRadius:"50%",background:"linear-gradient(135deg,#F5A623,#C47B0A)",boxShadow:"0 0 36px rgba(245,166,35,0.5)",fontSize:34,marginBottom:12}}>⚡</div>
           <h1 style={{margin:0,fontSize:22,fontWeight:900}}>{t("GenSet Aftersales","جينسيت للخدمة")}</h1>
-          <p style={{margin:"5px 0 0",color:C.muted,fontSize:12}}>{user.fullName}</p>
+          <p style={{margin:"5px 0 0",color:C.text,fontSize:12,fontWeight:600}}>{user.fullName}</p>
           {syncing&&<p style={{margin:"4px 0 0",color:C.accent,fontSize:11}}>{t("Saving...","جاري الحفظ...")}</p>}
         </div>
 
