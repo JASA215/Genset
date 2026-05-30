@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530110000 -->
+<!-- v20260530120000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530110000";
+  var APP_VERSION="v20260530120000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -3552,8 +3552,8 @@ function AdminPanel({
   }, "\uD83D\uDC47 ", t("Choose branch above", "اختر الفرع أعلاه"))), [...changeReqs].sort((a, b) => (a.status === "pending" ? 0 : 1) - (b.status === "pending" ? 0 : 1)).slice(reqPage * REQ_PAGE, (reqPage + 1) * REQ_PAGE).map(r => React.createElement("div", {
     key: r.id,
     style: {
-      background: selReqs.has(r.id) ? "rgba(245,166,35,0.12)" : r.status === "pending" ? "rgba(245,166,35,0.06)" : "rgba(46,160,67,0.08)",
-      border: "1px solid " + (selReqs.has(r.id) ? "#F5A623" : r.status === "pending" ? C.accent : C.green),
+      background: C.card,
+      border: "2px solid " + (selReqs.has(r.id) ? "#F5A623" : r.status === "pending" ? C.accent : C.green),
       borderRadius: 12,
       padding: "14px 16px",
       marginBottom: 10
@@ -4322,7 +4322,7 @@ function AdminPanel({
         justifyContent: "space-between",
         padding: "10px 14px",
         borderBottom: i < bTechs.length - 1 ? "1px solid " + C.border : "none",
-        background: selTechs.has(tech.id) ? "rgba(207,32,38,0.06)" : "transparent"
+        background: selTechs.has(tech.id) ? "rgba(207,32,38,0.08)" : C.card
       }
     }, React.createElement("input", {
       type: "checkbox",
@@ -4839,7 +4839,7 @@ function AdminPanel({
       alignItems: "center",
       padding: "10px 14px",
       borderBottom: i < engineModelsList.length - 1 ? "1px solid " + C.border : "none",
-      background: selEngines.has(e.id) ? "rgba(207,32,38,0.06)" : "transparent"
+      background: selEngines.has(e.id) ? "rgba(207,32,38,0.08)" : C.card
     }
   }, React.createElement("input", {
     type: "checkbox",
@@ -5647,7 +5647,8 @@ function ManagerReport({
       fontSize: 12,
       color: color || (bold ? C.text : C.muted),
       fontWeight: bold ? 700 : 400,
-      borderBottom: "1px solid rgba(42,58,77,0.5)"
+      borderBottom: "1px solid " + C.border,
+      background: C.card
     }
   }, c);
   return React.createElement(Bg, {
@@ -6011,7 +6012,8 @@ function ManagerReport({
     }), React.createElement("td", {
       style: {
         padding: "6px 9px",
-        borderBottom: "1px solid rgba(42,58,77,0.5)"
+        borderBottom: "1px solid " + C.border,
+        background: C.card
       }
     }, o >= 4 ? React.createElement(Bdg, {
       label: t("Good", "جيد"),
@@ -6072,7 +6074,8 @@ function ManagerReport({
       fontWeight: 700,
       fontSize: 15,
       color: rPage * MR_PAGE + i === 0 ? C.accent : C.muted,
-      borderBottom: "1px solid rgba(42,58,77,0.5)"
+      borderBottom: "1px solid " + C.border,
+      background: C.card
     }
   }, "#", rPage * MR_PAGE + i + 1), React.createElement(Td, {
     c: tk.name,
@@ -6086,7 +6089,8 @@ function ManagerReport({
   }), React.createElement("td", {
     style: {
       padding: "6px 9px",
-      borderBottom: "1px solid rgba(42,58,77,0.5)"
+      borderBottom: "1px solid " + C.border,
+      background: C.card
     }
   }, React.createElement("div", {
     style: {
@@ -6160,7 +6164,8 @@ function ManagerReport({
     }), React.createElement("td", {
       style: {
         padding: "6px 9px",
-        borderBottom: "1px solid rgba(42,58,77,0.5)"
+        borderBottom: "1px solid " + C.border,
+        background: C.card
       }
     }, s.followUpDone ? React.createElement(Bdg, {
       label: t("✓ Done", "✓ تم"),
@@ -7309,7 +7314,8 @@ function StatisticsReport({
         padding: "7px 10px",
         fontSize: 12,
         color: C.text,
-        borderBottom: "1px solid rgba(42,58,77,0.5)",
+        borderBottom: "1px solid " + C.border,
+        background: C.card,
         fontWeight: 600
       }
     }, m.month), React.createElement("td", {
@@ -7317,7 +7323,8 @@ function StatisticsReport({
         padding: "7px 10px",
         fontSize: 12,
         color: C.muted,
-        borderBottom: "1px solid rgba(42,58,77,0.5)"
+        borderBottom: "1px solid " + C.border,
+        background: C.card
       }
     }, m.surveys), React.createElement("td", {
       style: {
@@ -7325,13 +7332,15 @@ function StatisticsReport({
         fontSize: 13,
         fontWeight: 700,
         color: sc(parseFloat(m.avg)),
-        borderBottom: "1px solid rgba(42,58,77,0.5)"
+        borderBottom: "1px solid " + C.border,
+        background: C.card
       }
     }, m.avg), React.createElement("td", {
       style: {
         padding: "7px 10px",
         fontSize: 12,
-        borderBottom: "1px solid rgba(42,58,77,0.5)"
+        borderBottom: "1px solid " + C.border,
+        background: C.card
       }
     }, prev ? React.createElement("span", {
       style: {

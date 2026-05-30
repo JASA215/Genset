@@ -1028,7 +1028,7 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
               👇 {t("Choose branch above","اختر الفرع أعلاه")}
             </span>}
           </div>
-          {[...changeReqs].sort((a,b)=>(a.status==="pending"?0:1)-(b.status==="pending"?0:1)).slice(reqPage*REQ_PAGE,(reqPage+1)*REQ_PAGE).map(r=><div key={r.id} style={{background:selReqs.has(r.id)?"rgba(245,166,35,0.12)":r.status==="pending"?"rgba(245,166,35,0.06)":"rgba(46,160,67,0.08)",border:"1px solid "+(selReqs.has(r.id)?"#F5A623":r.status==="pending"?C.accent:C.green),borderRadius:12,padding:"14px 16px",marginBottom:10}}>
+          {[...changeReqs].sort((a,b)=>(a.status==="pending"?0:1)-(b.status==="pending"?0:1)).slice(reqPage*REQ_PAGE,(reqPage+1)*REQ_PAGE).map(r=><div key={r.id} style={{background:C.card,border:"2px solid "+(selReqs.has(r.id)?"#F5A623":r.status==="pending"?C.accent:C.green),borderRadius:12,padding:"14px 16px",marginBottom:10}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
             {r.status==="pending"&&<input type="checkbox" checked={selReqs.has(r.id)} onChange={e=>{const s=new Set(selReqs);e.target.checked?s.add(r.id):s.delete(r.id);setSelReqs(s);}} style={{width:16,height:16,cursor:"pointer",accentColor:C.accent,marginRight:10,marginTop:3,flexShrink:0}}/>}
             <div style={{flex:1}}>
@@ -1196,7 +1196,7 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
               {b.nameAr&&<span style={{color:C.muted,fontSize:12}}>/ {b.nameAr}</span>}
               <span style={{marginLeft:"auto",background:"rgba(26,111,168,0.2)",color:C.blue,borderRadius:6,padding:"2px 8px",fontSize:11,fontWeight:700}}>{bTechs.length} {t("techs","فني")}</span>
             </div>
-            {bTechs.map((tech,i)=><div key={tech.id} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 14px",borderBottom:i<bTechs.length-1?"1px solid "+C.border:"none",background:selTechs.has(tech.id)?"rgba(207,32,38,0.06)":"transparent"}}>
+            {bTechs.map((tech,i)=><div key={tech.id} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 14px",borderBottom:i<bTechs.length-1?"1px solid "+C.border:"none",background:selTechs.has(tech.id)?"rgba(207,32,38,0.08)":C.card}}>
               <input type="checkbox" checked={selTechs.has(tech.id)} onChange={e=>{const s=new Set(selTechs);e.target.checked?s.add(tech.id):s.delete(tech.id);setSelTechs(s);}} style={{width:14,height:14,cursor:"pointer",accentColor:C.accent,marginRight:8,flexShrink:0}}/>
               <div style={{display:"flex",alignItems:"center",gap:10}}>
                 <span style={{fontSize:16}}>👷</span>
@@ -1319,7 +1319,7 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
             <div style={{color:C.accent,fontSize:11,fontWeight:800}}>{t("MODEL","الموديل")}</div>
             <div></div>
           </div>
-          {engineModelsList.map((e,i)=><div key={e.id} style={{display:"grid",gridTemplateColumns:"auto 1fr 1fr 1.5fr auto",gap:8,alignItems:"center",padding:"10px 14px",borderBottom:i<engineModelsList.length-1?"1px solid "+C.border:"none",background:selEngines.has(e.id)?"rgba(207,32,38,0.06)":"transparent"}}>
+          {engineModelsList.map((e,i)=><div key={e.id} style={{display:"grid",gridTemplateColumns:"auto 1fr 1fr 1.5fr auto",gap:8,alignItems:"center",padding:"10px 14px",borderBottom:i<engineModelsList.length-1?"1px solid "+C.border:"none",background:selEngines.has(e.id)?"rgba(207,32,38,0.08)":C.card}}>
             <input type="checkbox" checked={selEngines.has(e.id)} onChange={ev=>{const s=new Set(selEngines);ev.target.checked?s.add(e.id):s.delete(e.id);setSelEngines(s);}} style={{width:14,height:14,cursor:"pointer",accentColor:C.accent}}/>
             <div style={{color:C.text,fontSize:12,fontWeight:600}}>{e.capacity}</div>
             <div style={{color:C.muted,fontSize:12}}>{e.brand}</div>
@@ -1644,7 +1644,7 @@ function ManagerReport({subs,branches,onBack,lang,lockedBranch=null,theme,toggle
   const[rPage,setRPage]=useState(0);
   const MR_PAGE=15;
   const Th=({c})=><th style={{padding:"7px 9px",textAlign:"left",color:C.accent,fontWeight:700,fontSize:11,borderBottom:"1px solid "+C.border,background:"rgba(230,146,10,0.08)"}}>{c}</th>;
-  const Td=({c,bold,color})=><td style={{padding:"6px 9px",fontSize:12,color:color||(bold?C.text:C.muted),fontWeight:bold?700:400,borderBottom:"1px solid rgba(42,58,77,0.5)"}}>{c}</td>;
+  const Td=({c,bold,color})=><td style={{padding:"6px 9px",fontSize:12,color:color||(bold?C.text:C.muted),fontWeight:bold?700:400,borderBottom:"1px solid "+C.border,background:C.card}}>{c}</td>;
 
   return<Bg dir={lang==="ar"?"rtl":"ltr"}>
     <div style={{maxWidth:640,margin:"0 auto",padding:"0 16px 40px"}}>
@@ -1721,7 +1721,7 @@ function ManagerReport({subs,branches,onBack,lang,lockedBranch=null,theme,toggle
                 <Td c={s.scores.tech>0?s.scores.tech.toFixed(1):"-"} color={sc(s.scores.tech)} bold/>
                 <Td c={s.scores.csat>0?s.scores.csat.toFixed(1):"-"} color={sc(s.scores.csat)} bold/>
                 <Td c={o.toFixed(2)} color={sc(o)} bold/>
-                <td style={{padding:"6px 9px",borderBottom:"1px solid rgba(42,58,77,0.5)"}}>
+                <td style={{padding:"6px 9px",borderBottom:"1px solid "+C.border,background:C.card}}>
                   {o>=4?<Bdg label={t("Good","جيد")} color={C.green} bg="rgba(46,160,67,0.15)"/>:o>=3?<Bdg label={t("Avg","متوسط")} color={C.yellow} bg="rgba(210,153,34,0.15)"/>:<Bdg label="⚠" color={C.red} bg="rgba(207,32,38,0.15)"/>}
                   {s.followUpRequired&&!s.followUpDone&&<span style={{marginLeft:4}}><Bdg label="FU"/></span>}
                 </td>
@@ -1740,9 +1740,9 @@ function ManagerReport({subs,branches,onBack,lang,lockedBranch=null,theme,toggle
             <table style={{width:"100%",borderCollapse:"collapse"}}>
               <thead><tr>{[t("Rank","الترتيب"),t("Technician","الفني"),t("Jobs","المهام"),t("Score","التقييم"),t("Performance","الأداء")].map(h=><Th key={h} c={h}/>)}</tr></thead>
               <tbody>{techRank.slice(rPage*MR_PAGE,(rPage+1)*MR_PAGE).map((tk,i)=><tr key={tk.name}>
-                <td style={{padding:"6px 9px",fontWeight:700,fontSize:15,color:rPage*MR_PAGE+i===0?C.accent:C.muted,borderBottom:"1px solid rgba(42,58,77,0.5)"}}>#{rPage*MR_PAGE+i+1}</td>
+                <td style={{padding:"6px 9px",fontWeight:700,fontSize:15,color:rPage*MR_PAGE+i===0?C.accent:C.muted,borderBottom:"1px solid "+C.border,background:C.card}}>#{rPage*MR_PAGE+i+1}</td>
                 <Td c={tk.name} bold/><Td c={tk.jobs}/><Td c={tk.avg.toFixed(2)} color={sc(tk.avg)} bold/>
-                <td style={{padding:"6px 9px",borderBottom:"1px solid rgba(42,58,77,0.5)"}}><div style={{height:8,background:C.border,borderRadius:4,width:120}}><div style={{height:"100%",background:sc(tk.avg),borderRadius:4,width:((tk.avg/5)*100)+"%"}}/></div></td>
+                <td style={{padding:"6px 9px",borderBottom:"1px solid "+C.border,background:C.card}}><div style={{height:8,background:C.border,borderRadius:4,width:120}}><div style={{height:"100%",background:sc(tk.avg),borderRadius:4,width:((tk.avg/5)*100)+"%"}}/></div></td>
               </tr>)}</tbody>
             </table>
           </div>
@@ -1759,7 +1759,7 @@ function ManagerReport({subs,branches,onBack,lang,lockedBranch=null,theme,toggle
               <thead><tr>{[t("Customer","العميل"),t("Branch","الفرع"),t("Technician","الفني"),t("Survey Date","تاريخ الفحص"),t("Due","الموعد"),t("Status","الحالة"),t("Notes","ملاحظات")].map(h=><Th key={h} c={h}/>)}</tr></thead>
               <tbody>{data.filter(s=>s.followUpRequired).slice(rPage*MR_PAGE,(rPage+1)*MR_PAGE).map(s=>{const od=s.followUpDate&&s.followUpDate<today&&!s.followUpDone;return<tr key={s.id}>
                 <Td c={s.customerName||"-"} bold/><Td c={s.branch||"-"}/><Td c={s.technicianName||"-"}/><Td c={fmtD(s.date)}/><Td c={fmtD(s.followUpDate)} color={od?C.red:undefined}/>
-                <td style={{padding:"6px 9px",borderBottom:"1px solid rgba(42,58,77,0.5)"}}>
+                <td style={{padding:"6px 9px",borderBottom:"1px solid "+C.border,background:C.card}}>
                   {s.followUpDone?<Bdg label={t("✓ Done","✓ تم")} color={C.green} bg="rgba(46,160,67,0.15)"/>:od?<Bdg label={t("⚠ Overdue","⚠ متأخر")} color={C.red} bg="rgba(207,32,38,0.15)"/>:<Bdg label={t("Pending","معلق")}/>}
                 </td>
                 <Td c={s.followUpNotes||"-"}/>
@@ -2217,10 +2217,10 @@ function StatisticsReport({subs,branches,user,onBack,lang,lockedBranch=null,them
                     const prev=monthlyData[i-1];
                     const trend=prev?parseFloat(m.avg)-parseFloat(prev.avg):0;
                     return<tr key={m.month}>
-                      <td style={{padding:"7px 10px",fontSize:12,color:C.text,borderBottom:"1px solid rgba(42,58,77,0.5)",fontWeight:600}}>{m.month}</td>
-                      <td style={{padding:"7px 10px",fontSize:12,color:C.muted,borderBottom:"1px solid rgba(42,58,77,0.5)"}}>{m.surveys}</td>
-                      <td style={{padding:"7px 10px",fontSize:13,fontWeight:700,color:sc(parseFloat(m.avg)),borderBottom:"1px solid rgba(42,58,77,0.5)"}}>{m.avg}</td>
-                      <td style={{padding:"7px 10px",fontSize:12,borderBottom:"1px solid rgba(42,58,77,0.5)"}}>{prev?<span style={{color:trend>=0?C.green:C.red,fontWeight:700}}>{trend>=0?"▲":"▼"} {Math.abs(trend).toFixed(2)}</span>:<span style={{color:C.muted}}>—</span>}</td>
+                      <td style={{padding:"7px 10px",fontSize:12,color:C.text,borderBottom:"1px solid "+C.border,background:C.card,fontWeight:600}}>{m.month}</td>
+                      <td style={{padding:"7px 10px",fontSize:12,color:C.muted,borderBottom:"1px solid "+C.border,background:C.card}}>{m.surveys}</td>
+                      <td style={{padding:"7px 10px",fontSize:13,fontWeight:700,color:sc(parseFloat(m.avg)),borderBottom:"1px solid "+C.border,background:C.card}}>{m.avg}</td>
+                      <td style={{padding:"7px 10px",fontSize:12,borderBottom:"1px solid "+C.border,background:C.card}}>{prev?<span style={{color:trend>=0?C.green:C.red,fontWeight:700}}>{trend>=0?"▲":"▼"} {Math.abs(trend).toFixed(2)}</span>:<span style={{color:C.muted}}>—</span>}</td>
                     </tr>;
                   })}</tbody>
                 </table>
