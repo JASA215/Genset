@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530140000 -->
+<!-- v20260530150000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530140000";
+  var APP_VERSION="v20260530150000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -2185,8 +2185,8 @@ function AdminPanel({
     }
   }, "\u2795 ", t("Add User", "إضافة مستخدم"))), React.createElement("div", {
     style: {
-      background: "rgba(26,111,168,0.08)",
-      border: "1px solid rgba(26,111,168,0.3)",
+      background: C.card,
+      border: "1px solid " + C.border,
       borderRadius: 12,
       padding: "12px 14px",
       marginBottom: 14
@@ -2782,8 +2782,8 @@ function AdminPanel({
     }
   }, "\u2795 ", t("Add Branch", "إضافة فرع"))), React.createElement("div", {
     style: {
-      background: "rgba(26,111,168,0.08)",
-      border: "1px solid rgba(26,111,168,0.3)",
+      background: C.card,
+      border: "1px solid " + C.border,
       borderRadius: 12,
       padding: "12px 14px",
       marginBottom: 14
@@ -3210,7 +3210,7 @@ function AdminPanel({
       style: {
         background: reqPage === 0 ? C.surface : "rgba(26,111,168,0.25)",
         color: reqPage === 0 ? C.muted : C.blue,
-        border: "1px solid " + (reqPage === 0 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
+        border: "1px solid " + (reqPage === 0 ? C.border : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
         fontSize: 11,
@@ -3223,7 +3223,7 @@ function AdminPanel({
       style: {
         background: reqPage >= pages - 1 ? C.surface : "rgba(26,111,168,0.25)",
         color: reqPage >= pages - 1 ? C.muted : C.blue,
-        border: "1px solid " + (reqPage >= pages - 1 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
+        border: "1px solid " + (reqPage >= pages - 1 ? C.border : "rgba(26,111,168,0.4)"),
         borderRadius: 7,
         padding: "4px 10px",
         fontSize: 11,
@@ -3683,8 +3683,8 @@ function AdminPanel({
     }
   }, "+ ", t("Add Technician", "إضافة فني"))), React.createElement("div", {
     style: {
-      background: "rgba(26,188,156,0.08)",
-      border: "1px solid rgba(26,188,156,0.3)",
+      background: C.card,
+      border: "1px solid " + C.border,
       borderRadius: 12,
       padding: "12px 14px",
       marginBottom: 14
@@ -4452,8 +4452,8 @@ function AdminPanel({
     }
   }, "+ ", t("Add Model", "إضافة موديل"))), React.createElement("div", {
     style: {
-      background: "rgba(245,166,35,0.08)",
-      border: "1px solid rgba(245,166,35,0.3)",
+      background: C.card,
+      border: "1px solid " + C.border,
       borderRadius: 12,
       padding: "12px 14px",
       marginBottom: 14
@@ -5937,7 +5937,7 @@ function ManagerReport({
     style: {
       background: rPage === 0 ? C.surface : "rgba(26,111,168,0.25)",
       color: rPage === 0 ? C.muted : C.blue,
-      border: "1px solid " + (rPage === 0 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
+      border: "1px solid " + (rPage === 0 ? C.border : "rgba(26,111,168,0.4)"),
       borderRadius: 7,
       padding: "3px 10px",
       fontSize: 11,
@@ -5950,7 +5950,7 @@ function ManagerReport({
     style: {
       background: rPage >= Math.ceil(n / MR_PAGE) - 1 ? C.surface : "rgba(26,111,168,0.25)",
       color: rPage >= Math.ceil(n / MR_PAGE) - 1 ? C.muted : C.blue,
-      border: "1px solid " + (rPage >= Math.ceil(n / MR_PAGE) - 1 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
+      border: "1px solid " + (rPage >= Math.ceil(n / MR_PAGE) - 1 ? C.border : "rgba(26,111,168,0.4)"),
       borderRadius: 7,
       padding: "3px 10px",
       fontSize: 11,
@@ -7486,6 +7486,7 @@ function App() {
   const [dashBranch, setDashBranch] = useState("all");
   const [histBranch, setHistBranch] = useState("all");
   const [histPage, setHistPage] = useState(0);
+  const [histSearch, setHistSearch] = useState("");
   const [fuBranch, setFuBranch] = useState("all");
   const [fuPage, setFuPage] = useState(0);
   const [custPage, setCustPage] = useState(0);
@@ -8470,6 +8471,7 @@ function App() {
     }))))))));
   }
   if (view === "history") {
+    const histData = histData.filter(s => !histSearch || (s.customerName || "").toLowerCase().includes(histSearch.toLowerCase()) || (s.technicianName || "").toLowerCase().includes(histSearch.toLowerCase()));
     return React.createElement(Bg, {
       dir: dir
     }, React.createElement("div", {
@@ -8504,7 +8506,7 @@ function App() {
         color: C.muted,
         fontSize: 12
       }
-    }, (histBranch === "all" ? filteredSubs : filteredSubs.filter(s => s.branch === histBranch)).length, " ", t("records", "سجل")))), React.createElement(LangBtn, {
+    }, histData.length, " ", t("records", "سجل")))), React.createElement(LangBtn, {
       lang: lang,
       onToggle: toggleLang
     }), React.createElement(ThemeBtn, {
@@ -8514,7 +8516,55 @@ function App() {
       online: online,
       syncing: syncing,
       t: t
-    }), branches.length > 0 && React.createElement("div", {
+    }), React.createElement("div", {
+      style: {
+        position: "relative",
+        marginBottom: 10
+      }
+    }, React.createElement("span", {
+      style: {
+        position: "absolute",
+        left: 12,
+        top: "50%",
+        transform: "translateY(-50%)",
+        fontSize: 14,
+        color: C.muted
+      }
+    }, "\uD83D\uDD0D"), React.createElement("input", {
+      value: histSearch,
+      onChange: e => {
+        setHistSearch(e.target.value);
+        setHistPage(0);
+      },
+      placeholder: t("Search by customer or technician...", "البحث باسم العميل أو الفني..."),
+      style: {
+        width: "100%",
+        background: C.card,
+        border: "1px solid " + (histSearch ? C.accent : C.border),
+        borderRadius: 10,
+        color: C.text,
+        padding: "10px 12px 10px 36px",
+        fontSize: 13,
+        outline: "none",
+        boxSizing: "border-box"
+      }
+    }), histSearch && React.createElement("button", {
+      onClick: () => {
+        setHistSearch("");
+        setHistPage(0);
+      },
+      style: {
+        position: "absolute",
+        right: 10,
+        top: "50%",
+        transform: "translateY(-50%)",
+        background: "none",
+        border: "none",
+        color: C.muted,
+        cursor: "pointer",
+        fontSize: 16
+      }
+    }, "\u2715")), branches.length > 0 && React.createElement("div", {
       style: {
         display: "flex",
         gap: 6,
@@ -8557,8 +8607,8 @@ function App() {
         whiteSpace: "nowrap",
         flexShrink: 0
       }
-    }, b.nameEn))), (histBranch === "all" ? filteredSubs : filteredSubs.filter(s => s.branch === histBranch)).length > 0 && (() => {
-      const total = (histBranch === "all" ? filteredSubs : filteredSubs.filter(s => s.branch === histBranch)).length;
+    }, b.nameEn))), histData.length > 0 && (() => {
+      const total = histData.length;
       const pages = Math.ceil(total / PAGE);
       return React.createElement("div", {
         style: {
@@ -8609,7 +8659,7 @@ function App() {
         style: {
           background: histPage === 0 ? C.surface : "rgba(26,111,168,0.25)",
           color: histPage === 0 ? C.muted : C.blue,
-          border: "1px solid " + (histPage === 0 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
+          border: "1px solid " + (histPage === 0 ? C.border : "rgba(26,111,168,0.4)"),
           borderRadius: 7,
           padding: "4px 10px",
           fontSize: 11,
@@ -8622,7 +8672,7 @@ function App() {
         style: {
           background: histPage >= pages - 1 ? C.surface : "rgba(26,111,168,0.25)",
           color: histPage >= pages - 1 ? C.muted : C.blue,
-          border: "1px solid " + (histPage >= pages - 1 ? "#3D4E62" : "rgba(26,111,168,0.4)"),
+          border: "1px solid " + (histPage >= pages - 1 ? C.border : "rgba(26,111,168,0.4)"),
           borderRadius: 7,
           padding: "4px 10px",
           fontSize: 11,
@@ -8630,7 +8680,7 @@ function App() {
           cursor: histPage >= pages - 1 ? "not-allowed" : "pointer"
         }
       }, t("Next", "التالي"), " \u2192")));
-    })(), (histBranch === "all" ? filteredSubs : filteredSubs.filter(s => s.branch === histBranch)).length === 0 ? React.createElement("div", {
+    })(), histData.length === 0 ? React.createElement("div", {
       style: {
         textAlign: "center",
         padding: "60px 0",
@@ -8642,7 +8692,7 @@ function App() {
         marginBottom: 12
       }
     }, "\uD83D\uDCC2"), t("No records yet.", "لا توجد سجلات.")) : (() => {
-      const allHist = histBranch === "all" ? filteredSubs : filteredSubs.filter(s => s.branch === histBranch);
+      const allHist = histData;
       const histPaged = allHist.slice(histPage * PAGE, (histPage + 1) * PAGE);
       return React.createElement("div", null, histPaged.map(s => {
         const o = parseFloat(ovs(s));
@@ -10483,9 +10533,28 @@ function App() {
   }, t("Inspection Survey", "نموذج الفحص")), React.createElement("div", {
     style: {
       color: C.muted,
-      fontSize: 11
+      fontSize: 11,
+      display: "flex",
+      gap: 6,
+      alignItems: "center"
     }
-  }, STEPS[step], " \xB7 ", step + 1, "/", STEPS.length))), React.createElement(LangBtn, {
+  }, survey.serviceType && React.createElement("span", {
+    style: {
+      background: C.surface,
+      border: "1px solid " + C.border,
+      borderRadius: 5,
+      padding: "1px 6px",
+      fontSize: 10,
+      fontWeight: 700,
+      color: C.accent
+    }
+  }, {
+    "Preventive Maintenance": "⚙️ PM",
+    "Corrective Maintenance": "🔨 CM",
+    "PDI Inspection": "🔍 PDI",
+    "Warranty Claim": "🛡️ WC",
+    "Customer Complaint": "📝 CC"
+  }[survey.serviceType] || survey.serviceType), STEPS[step], " \xB7 ", step + 1, "/", STEPS.length))), React.createElement(LangBtn, {
     lang: lang,
     onToggle: toggleLang
   }), React.createElement(ThemeBtn, {

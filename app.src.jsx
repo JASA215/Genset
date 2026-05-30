@@ -673,7 +673,7 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
         </div>
 
         {/* Import / Export Users - TOP */}
-        <div style={{background:"rgba(26,111,168,0.08)",border:"1px solid rgba(26,111,168,0.3)",borderRadius:12,padding:"12px 14px",marginBottom:14}}>
+        <div style={{background:C.card,border:"1px solid "+C.border,borderRadius:12,padding:"12px 14px",marginBottom:14}}>
           <div style={{fontWeight:700,color:C.blue,fontSize:13,marginBottom:6}}>📥📤 {t("Import / Export","استيراد / تصدير")}</div>
           <div style={{color:C.muted,fontSize:11,marginBottom:8}}>Username · Password · Full Name · Role · Branch</div>
           <div style={{display:"flex",gap:8}}>
@@ -821,7 +821,7 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
 
         {/* Edit Branch Form */}
         {/* Import / Export Branches - TOP */}
-        <div style={{background:"rgba(26,111,168,0.08)",border:"1px solid rgba(26,111,168,0.3)",borderRadius:12,padding:"12px 14px",marginBottom:14}}>
+        <div style={{background:C.card,border:"1px solid "+C.border,borderRadius:12,padding:"12px 14px",marginBottom:14}}>
           <div style={{fontWeight:700,color:C.blue,fontSize:13,marginBottom:6}}>📥📤 {t("Import / Export","استيراد / تصدير")}</div>
           <div style={{color:C.muted,fontSize:11,marginBottom:8}}>Code · Name English · Name Arabic</div>
           <div style={{display:"flex",gap:8}}>
@@ -920,9 +920,9 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
             {pages>1&&<div style={{display:"flex",alignItems:"center",gap:6}}>
               <span style={{color:C.muted,fontSize:11}}>{reqPage+1}/{pages}</span>
               <button onClick={()=>setReqPage(p=>Math.max(0,p-1))} disabled={reqPage===0}
-                style={{background:reqPage===0?C.surface:"rgba(26,111,168,0.25)",color:reqPage===0?C.muted:C.blue,border:"1px solid "+(reqPage===0?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:reqPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
+                style={{background:reqPage===0?C.surface:"rgba(26,111,168,0.25)",color:reqPage===0?C.muted:C.blue,border:"1px solid "+(reqPage===0?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:reqPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
               <button onClick={()=>setReqPage(p=>Math.min(pages-1,p+1))} disabled={reqPage>=pages-1}
-                style={{background:reqPage>=pages-1?C.surface:"rgba(26,111,168,0.25)",color:reqPage>=pages-1?C.muted:C.blue,border:"1px solid "+(reqPage>=pages-1?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:reqPage>=pages-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
+                style={{background:reqPage>=pages-1?C.surface:"rgba(26,111,168,0.25)",color:reqPage>=pages-1?C.muted:C.blue,border:"1px solid "+(reqPage>=pages-1?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:reqPage>=pages-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
             </div>}
           </div>;
         })()}
@@ -1065,7 +1065,7 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
         </div>
 
         {/* Import / Export Technicians - TOP */}
-        <div style={{background:"rgba(26,188,156,0.08)",border:"1px solid rgba(26,188,156,0.3)",borderRadius:12,padding:"12px 14px",marginBottom:14}}>
+        <div style={{background:C.card,border:"1px solid "+C.border,borderRadius:12,padding:"12px 14px",marginBottom:14}}>
           <div style={{fontWeight:700,color:"#1ABC9C",fontSize:13,marginBottom:6}}>📥📤 {t("Import / Export","استيراد / تصدير")}</div>
           <div style={{color:C.muted,fontSize:11,marginBottom:8}}>Branch · Name EN · Name AR · ID · Title</div>
           <div style={{display:"flex",gap:8}}>
@@ -1238,7 +1238,7 @@ function AdminPanel({user,onLogout,onBack,lang,onLangToggle,subs=[],notification
         </div>
 
         {/* Import / Export Engine Models - TOP */}
-        <div style={{background:"rgba(245,166,35,0.08)",border:"1px solid rgba(245,166,35,0.3)",borderRadius:12,padding:"12px 14px",marginBottom:14}}>
+        <div style={{background:C.card,border:"1px solid "+C.border,borderRadius:12,padding:"12px 14px",marginBottom:14}}>
           <div style={{fontWeight:700,color:C.accent,fontSize:13,marginBottom:6}}>📥📤 {t("Import / Export","استيراد / تصدير")}</div>
           <div style={{color:C.muted,fontSize:11,marginBottom:8}}>Capacity · Brand · Engine Model</div>
           <div style={{display:"flex",gap:8}}>
@@ -1705,9 +1705,9 @@ function ManagerReport({subs,branches,onBack,lang,lockedBranch=null,theme,toggle
           {n>MR_PAGE&&<div style={{display:"flex",alignItems:"center",gap:6}}>
             <span style={{color:C.muted,fontSize:11}}>{t("Page","صفحة")} {rPage+1}/{Math.ceil(n/MR_PAGE)}</span>
             <button onClick={()=>setRPage(p=>Math.max(0,p-1))} disabled={rPage===0}
-              style={{background:rPage===0?C.surface:"rgba(26,111,168,0.25)",color:rPage===0?C.muted:C.blue,border:"1px solid "+(rPage===0?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"3px 10px",fontSize:11,fontWeight:700,cursor:rPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
+              style={{background:rPage===0?C.surface:"rgba(26,111,168,0.25)",color:rPage===0?C.muted:C.blue,border:"1px solid "+(rPage===0?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"3px 10px",fontSize:11,fontWeight:700,cursor:rPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
             <button onClick={()=>setRPage(p=>Math.min(Math.ceil(n/MR_PAGE)-1,p+1))} disabled={rPage>=Math.ceil(n/MR_PAGE)-1}
-              style={{background:rPage>=Math.ceil(n/MR_PAGE)-1?C.surface:"rgba(26,111,168,0.25)",color:rPage>=Math.ceil(n/MR_PAGE)-1?C.muted:C.blue,border:"1px solid "+(rPage>=Math.ceil(n/MR_PAGE)-1?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"3px 10px",fontSize:11,fontWeight:700,cursor:rPage>=Math.ceil(n/MR_PAGE)-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
+              style={{background:rPage>=Math.ceil(n/MR_PAGE)-1?C.surface:"rgba(26,111,168,0.25)",color:rPage>=Math.ceil(n/MR_PAGE)-1?C.muted:C.blue,border:"1px solid "+(rPage>=Math.ceil(n/MR_PAGE)-1?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"3px 10px",fontSize:11,fontWeight:700,cursor:rPage>=Math.ceil(n/MR_PAGE)-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
           </div>}
         </div>
         {n===0?<div style={{color:C.muted,padding:"16px 0",marginBottom:16}}>{t("No surveys in this period.","لا توجد فحوصات.")}</div>:(
@@ -2302,6 +2302,7 @@ function App(){
   const[dashBranch,setDashBranch]=useState("all");
   const[histBranch,setHistBranch]=useState("all");
   const[histPage,setHistPage]=useState(0);
+  const[histSearch,setHistSearch]=useState("");
   const[fuBranch,setFuBranch]=useState("all");
   const[fuPage,setFuPage]=useState(0);
   const[custPage,setCustPage]=useState(0);
@@ -2695,20 +2696,27 @@ function App(){
 
   /* ── HISTORY ── */
   if(view==="history"){
+    const histData=histData.filter(s=>!histSearch||((s.customerName||"").toLowerCase().includes(histSearch.toLowerCase())||((s.technicianName||"").toLowerCase().includes(histSearch.toLowerCase()))));
     return<Bg dir={dir}><div style={{maxWidth:480,margin:"0 auto",padding:"0 16px 40px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"18px 0 14px"}}>
-        <div style={{display:"flex",alignItems:"center",gap:12}}><Back onClick={()=>setView("menu")}/><div><h2 style={{margin:0,fontSize:18,fontWeight:800}}>{t("Inspection History","سجل الفحوصات")}</h2><div style={{color:C.muted,fontSize:12}}>{(histBranch==="all"?filteredSubs:filteredSubs.filter(s=>s.branch===histBranch)).length} {t("records","سجل")}</div></div></div>
+        <div style={{display:"flex",alignItems:"center",gap:12}}><Back onClick={()=>setView("menu")}/><div><h2 style={{margin:0,fontSize:18,fontWeight:800}}>{t("Inspection History","سجل الفحوصات")}</h2><div style={{color:C.muted,fontSize:12}}>{histData.length} {t("records","سجل")}</div></div></div>
         <LangBtn lang={lang} onToggle={toggleLang}/><ThemeBtn theme={theme} onToggle={toggleTheme}/>
       </div>
       <SyncBanner online={online} syncing={syncing} t={t}/>
+      {/* Search bar */}
+      <div style={{position:"relative",marginBottom:10}}>
+        <span style={{position:"absolute",left:12,top:"50%",transform:"translateY(-50%)",fontSize:14,color:C.muted}}>🔍</span>
+        <input value={histSearch} onChange={e=>{setHistSearch(e.target.value);setHistPage(0);}} placeholder={t("Search by customer or technician...","البحث باسم العميل أو الفني...")} style={{width:"100%",background:C.card,border:"1px solid "+(histSearch?C.accent:C.border),borderRadius:10,color:C.text,padding:"10px 12px 10px 36px",fontSize:13,outline:"none",boxSizing:"border-box"}}/>
+        {histSearch&&<button onClick={()=>{setHistSearch("");setHistPage(0);}} style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",color:C.muted,cursor:"pointer",fontSize:16}}>✕</button>}
+      </div>
       {/* Branch filter */}
       {branches.length>0&&<div style={{display:"flex",gap:6,overflowX:"auto",marginBottom:8,paddingBottom:4}}>
         {!(isSupervisor||isBranchManager)&&<button onClick={()=>{setHistBranch("all");setHistPage(0);}} style={{background:histBranch==="all"?C.blue:C.surface,color:histBranch==="all"?"#fff":C.text,border:"1px solid "+(histBranch==="all"?C.blue:C.border),borderRadius:8,padding:"6px 12px",fontSize:11,fontWeight:700,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>🌐 {t("All","الكل")}</button>}
         {branches.filter(b=>(isSupervisor||isBranchManager)?b.nameEn===userBranch:true).map(b=><button key={b.id} onClick={()=>{setHistBranch(b.nameEn);setHistPage(0);}} style={{background:histBranch===b.nameEn?C.blue:C.surface,color:histBranch===b.nameEn?"#fff":C.text,border:"1px solid "+(histBranch===b.nameEn?C.blue:C.border),borderRadius:8,padding:"6px 12px",fontSize:11,fontWeight:700,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>{b.nameEn}</button>)}
       </div>}
       {/* Info bar: selected branch + prev/next */}
-      {(histBranch==="all"?filteredSubs:filteredSubs.filter(s=>s.branch===histBranch)).length>0&&(()=>{
-        const total=(histBranch==="all"?filteredSubs:filteredSubs.filter(s=>s.branch===histBranch)).length;
+      {histData.length>0&&(()=>{
+        const total=histData.length;
         const pages=Math.ceil(total/PAGE);
         return<div style={{display:"flex",alignItems:"center",justifyContent:"space-between",background:C.surface,border:"1px solid "+C.border,borderRadius:9,padding:"8px 12px",marginBottom:10}}>
           <div style={{display:"flex",alignItems:"center",gap:6}}>
@@ -2721,14 +2729,14 @@ function App(){
           {pages>1&&<div style={{display:"flex",alignItems:"center",gap:6}}>
             <span style={{color:C.muted,fontSize:11}}>{histPage+1}/{pages}</span>
             <button onClick={()=>setHistPage(p=>Math.max(0,p-1))} disabled={histPage===0}
-              style={{background:histPage===0?C.surface:"rgba(26,111,168,0.25)",color:histPage===0?C.muted:C.blue,border:"1px solid "+(histPage===0?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:histPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
+              style={{background:histPage===0?C.surface:"rgba(26,111,168,0.25)",color:histPage===0?C.muted:C.blue,border:"1px solid "+(histPage===0?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:histPage===0?"not-allowed":"pointer"}}>← {t("Prev","السابق")}</button>
             <button onClick={()=>setHistPage(p=>Math.min(pages-1,p+1))} disabled={histPage>=pages-1}
-              style={{background:histPage>=pages-1?C.surface:"rgba(26,111,168,0.25)",color:histPage>=pages-1?C.muted:C.blue,border:"1px solid "+(histPage>=pages-1?"#3D4E62":"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:histPage>=pages-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
+              style={{background:histPage>=pages-1?C.surface:"rgba(26,111,168,0.25)",color:histPage>=pages-1?C.muted:C.blue,border:"1px solid "+(histPage>=pages-1?C.border:"rgba(26,111,168,0.4)"),borderRadius:7,padding:"4px 10px",fontSize:11,fontWeight:700,cursor:histPage>=pages-1?"not-allowed":"pointer"}}>{t("Next","التالي")} →</button>
           </div>}
         </div>;
       })()}
-      {(histBranch==="all"?filteredSubs:filteredSubs.filter(s=>s.branch===histBranch)).length===0?<div style={{textAlign:"center",padding:"60px 0",color:C.muted}}><div style={{fontSize:48,marginBottom:12}}>📂</div>{t("No records yet.","لا توجد سجلات.")}</div>:(()=>{
-        const allHist=(histBranch==="all"?filteredSubs:filteredSubs.filter(s=>s.branch===histBranch));
+      {histData.length===0?<div style={{textAlign:"center",padding:"60px 0",color:C.muted}}><div style={{fontSize:48,marginBottom:12}}>📂</div>{t("No records yet.","لا توجد سجلات.")}</div>:(()=>{
+        const allHist=histData;
         const histPaged=allHist.slice(histPage*PAGE,(histPage+1)*PAGE);
         return<div>
           {histPaged.map(s=>{const o=parseFloat(ovs(s));return(
@@ -3168,7 +3176,7 @@ function App(){
     <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 0 10px"}}>
       <div style={{display:"flex",alignItems:"center",gap:10}}>
         <Back onClick={()=>setView("menu")}/>
-        <div><h2 style={{margin:0,fontSize:16,fontWeight:800}}>{t("Inspection Survey","نموذج الفحص")}</h2><div style={{color:C.muted,fontSize:11}}>{STEPS[step]} · {step+1}/{STEPS.length}</div></div>
+        <div><h2 style={{margin:0,fontSize:16,fontWeight:800}}>{t("Inspection Survey","نموذج الفحص")}</h2><div style={{color:C.muted,fontSize:11,display:"flex",gap:6,alignItems:"center"}}>{survey.serviceType&&<span style={{background:C.surface,border:"1px solid "+C.border,borderRadius:5,padding:"1px 6px",fontSize:10,fontWeight:700,color:C.accent}}>{{"Preventive Maintenance":"⚙️ PM","Corrective Maintenance":"🔨 CM","PDI Inspection":"🔍 PDI","Warranty Claim":"🛡️ WC","Customer Complaint":"📝 CC"}[survey.serviceType]||survey.serviceType}</span>}{STEPS[step]} · {step+1}/{STEPS.length}</div></div>
       </div>
       <LangBtn lang={lang} onToggle={toggleLang}/><ThemeBtn theme={theme} onToggle={toggleTheme}/>
     </div>
