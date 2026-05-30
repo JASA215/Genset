@@ -1780,7 +1780,7 @@ function ManagerReport({subs,branches,onBack,lang,lockedBranch=null,theme,toggle
               <span style={{fontSize:12,color:C.text}}>{en} / <span style={{color:C.muted}}>{ar}</span></span>
               <span style={{fontSize:13,fontWeight:700,color:sc(a)}}>{a>0?a.toFixed(2):"-"} / 5.0</span>
             </div>
-            <div style={{height:8,background:C.border,borderRadius:4}}><div style={{height:"100%",background:a>0?sc(a):C.border,borderRadius:4,width:a>0?((a/5)*100)+"%":"0%"}}/></div>
+            <div style={{height:8,background:C===LIGHT?"#D0DAE4":C.border,borderRadius:4}}><div style={{height:"100%",background:a>0?sc(a):C.border,borderRadius:4,width:a>0?((a/5)*100)+"%":"0%"}}/></div>
           </div>
         ))}</div>
         {/* Low scoring within CSAT tab */}
@@ -2696,7 +2696,8 @@ function App(){
 
   /* ── HISTORY ── */
   if(view==="history"){
-    const histData=histData.filter(s=>!histSearch||((s.customerName||"").toLowerCase().includes(histSearch.toLowerCase())||((s.technicianName||"").toLowerCase().includes(histSearch.toLowerCase()))));
+    const histBase=(histBranch==="all"?filteredSubs:filteredSubs.filter(s=>s.branch===histBranch));
+    const histData=histSearch?histBase.filter(s=>((s.customerName||"").toLowerCase().includes(histSearch.toLowerCase())||((s.technicianName||"").toLowerCase().includes(histSearch.toLowerCase())))):histBase;
     return<Bg dir={dir}><div style={{maxWidth:480,margin:"0 auto",padding:"0 16px 40px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"18px 0 14px"}}>
         <div style={{display:"flex",alignItems:"center",gap:12}}><Back onClick={()=>setView("menu")}/><div><h2 style={{margin:0,fontSize:18,fontWeight:800}}>{t("Inspection History","سجل الفحوصات")}</h2><div style={{color:C.muted,fontSize:12}}>{histData.length} {t("records","سجل")}</div></div></div>

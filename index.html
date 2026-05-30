@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530150000 -->
+<!-- v20260530160000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530150000";
+  var APP_VERSION="v20260530160000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -6237,7 +6237,7 @@ function ManagerReport({
   }, a > 0 ? a.toFixed(2) : "-", " / 5.0")), React.createElement("div", {
     style: {
       height: 8,
-      background: C.border,
+      background: C === LIGHT ? "#D0DAE4" : C.border,
       borderRadius: 4
     }
   }, React.createElement("div", {
@@ -8471,7 +8471,8 @@ function App() {
     }))))))));
   }
   if (view === "history") {
-    const histData = histData.filter(s => !histSearch || (s.customerName || "").toLowerCase().includes(histSearch.toLowerCase()) || (s.technicianName || "").toLowerCase().includes(histSearch.toLowerCase()));
+    const histBase = histBranch === "all" ? filteredSubs : filteredSubs.filter(s => s.branch === histBranch);
+    const histData = histSearch ? histBase.filter(s => (s.customerName || "").toLowerCase().includes(histSearch.toLowerCase()) || (s.technicianName || "").toLowerCase().includes(histSearch.toLowerCase())) : histBase;
     return React.createElement(Bg, {
       dir: dir
     }, React.createElement("div", {
