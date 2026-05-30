@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530060000 -->
+<!-- v20260530070000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530060000";
+  var APP_VERSION="v20260530070000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -10644,7 +10644,7 @@ function App() {
       left: 0,
       right: 0,
       zIndex: 200,
-      background: "#FFFFFF",
+      background: C.card,
       border: "1px solid " + C.border,
       borderRadius: 8,
       boxShadow: "0 8px 24px rgba(0,0,0,0.6)",
@@ -10663,7 +10663,8 @@ function App() {
   }, React.createElement("div", {
     style: {
       fontWeight: 600,
-      fontSize: 13
+      fontSize: 13,
+      color: C.text
     }
   }, c.customerName), React.createElement("div", {
     style: {

@@ -3209,9 +3209,9 @@ function App(){
         <div style={{color:C.accent,fontWeight:700,fontSize:12,marginBottom:8}}>👥 {t("Auto-fill from Customer Database","تعبئة تلقائية من قاعدة البيانات")}</div>
         <div style={{position:"relative"}}>
           <input value={cs} onChange={e=>{setCs(e.target.value);setShowDrop(true);}} onFocus={()=>setShowDrop(true)} placeholder={t("Search customer...","البحث عن عميل...")} style={{width:"100%",background:C.bg,border:"1px solid "+C.accent,borderRadius:8,color:C.text,padding:"10px 12px",fontSize:14,outline:"none",boxSizing:"border-box"}}/>
-          {showDrop&&dropCusts.length>0&&<div style={{position:"absolute",top:"100%",left:0,right:0,zIndex:200,background:"#FFFFFF",border:"1px solid "+C.border,borderRadius:8,boxShadow:"0 8px 24px rgba(0,0,0,0.6)",marginTop:4,maxHeight:200,overflowY:"auto"}}>
+          {showDrop&&dropCusts.length>0&&<div style={{position:"absolute",top:"100%",left:0,right:0,zIndex:200,background:C.card,border:"1px solid "+C.border,borderRadius:8,boxShadow:"0 8px 24px rgba(0,0,0,0.6)",marginTop:4,maxHeight:200,overflowY:"auto"}}>
             {dropCusts.map(c=><div key={c.id} onClick={()=>fillCust(c)} style={{padding:"10px 14px",cursor:"pointer",borderBottom:"1px solid "+C.border}}>
-              <div style={{fontWeight:600,fontSize:13}}>{c.customerName}</div>
+              <div style={{fontWeight:600,fontSize:13,color:C.text}}>{c.customerName}</div>
               <div style={{fontSize:11,color:C.muted}}>{c.siteLocation}{c.generatorModel?" · "+c.generatorModel:""}</div>
             </div>)}
           </div>}
