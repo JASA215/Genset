@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530070000 -->
+<!-- v20260530080000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530070000";
+  var APP_VERSION="v20260530080000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -429,7 +429,7 @@ const LIGHT = {
   red: "#B53025",
   yellow: "#9A7010",
   text: "#1A2332",
-  muted: "#4E6070",
+  muted: "#2E4050",
   blue: "#1558A8"
 };
 let C = DARK;
@@ -1480,13 +1480,14 @@ function SyncBanner({
   }, "\uD83D\uDCF5 ", t("Offline", "غير متصل"));
   return React.createElement("div", {
     style: {
-      background: "rgba(46,160,67,0.12)",
+      background: C === LIGHT ? "rgba(26,122,46,0.12)" : "rgba(46,160,67,0.12)",
       border: "1px solid " + C.green,
       borderRadius: 8,
       padding: "5px 12px",
       marginBottom: 10,
       fontSize: 11,
       color: C.green,
+      fontWeight: 700,
       textAlign: "center"
     }
   }, "\uD83D\uDFE2 ", t("Live — all devices synced", "مباشر — جميع الأجهزة متزامنة"));
@@ -10625,6 +10626,7 @@ function App() {
       setShowDrop(true);
     },
     onFocus: () => setShowDrop(true),
+    onBlur: () => setTimeout(() => setShowDrop(false), 200),
     placeholder: t("Search customer...", "البحث عن عميل..."),
     style: {
       width: "100%",

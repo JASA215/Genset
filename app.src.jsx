@@ -25,7 +25,7 @@ const DARK={
 const LIGHT={
   bg:"#F0F4F8",surface:"rgba(255,255,255,0.98)",card:"rgba(255,255,255,1)",
   border:"#C8D4DF",accent:"#C97A08",green:"#1A7A2E",red:"#B53025",
-  yellow:"#9A7010",text:"#1A2332",muted:"#4E6070",blue:"#1558A8"
+  yellow:"#9A7010",text:"#1A2332",muted:"#2E4050",blue:"#1558A8"
 };
 let C=DARK;
 function applyTheme(t){
@@ -305,7 +305,7 @@ function ThemeBtn({theme,onToggle}){return<button onClick={onToggle} title={them
 function SyncBanner({online,syncing,t}){
   if(syncing)return<div style={{background:"rgba(245,166,35,0.15)",border:"1px solid "+C.accent,borderRadius:8,padding:"5px 12px",marginBottom:10,fontSize:12,color:C.accent,textAlign:"center"}}>🔄 {t("Syncing...","جاري المزامنة...")}</div>;
   if(!online)return<div style={{background:"rgba(207,32,38,0.15)",border:"1px solid "+C.red,borderRadius:8,padding:"5px 12px",marginBottom:10,fontSize:12,color:C.red,textAlign:"center"}}>📵 {t("Offline","غير متصل")}</div>;
-  return<div style={{background:"rgba(46,160,67,0.12)",border:"1px solid "+C.green,borderRadius:8,padding:"5px 12px",marginBottom:10,fontSize:11,color:C.green,textAlign:"center"}}>🟢 {t("Live — all devices synced","مباشر — جميع الأجهزة متزامنة")}</div>;
+  return<div style={{background:C===LIGHT?"rgba(26,122,46,0.12)":"rgba(46,160,67,0.12)",border:"1px solid "+C.green,borderRadius:8,padding:"5px 12px",marginBottom:10,fontSize:11,color:C.green,fontWeight:700,textAlign:"center"}}>🟢 {t("Live — all devices synced","مباشر — جميع الأجهزة متزامنة")}</div>;
 }
 
 function RoleBadge({role}){
@@ -3208,7 +3208,7 @@ function App(){
       {filteredCusts.length>0&&<div style={{marginBottom:16,padding:"12px 14px",background:"rgba(245,166,35,0.07)",border:"1px solid rgba(245,166,35,0.3)",borderRadius:10}}>
         <div style={{color:C.accent,fontWeight:700,fontSize:12,marginBottom:8}}>👥 {t("Auto-fill from Customer Database","تعبئة تلقائية من قاعدة البيانات")}</div>
         <div style={{position:"relative"}}>
-          <input value={cs} onChange={e=>{setCs(e.target.value);setShowDrop(true);}} onFocus={()=>setShowDrop(true)} placeholder={t("Search customer...","البحث عن عميل...")} style={{width:"100%",background:C.bg,border:"1px solid "+C.accent,borderRadius:8,color:C.text,padding:"10px 12px",fontSize:14,outline:"none",boxSizing:"border-box"}}/>
+          <input value={cs} onChange={e=>{setCs(e.target.value);setShowDrop(true);}} onFocus={()=>setShowDrop(true)} onBlur={()=>setTimeout(()=>setShowDrop(false),200)} placeholder={t("Search customer...","البحث عن عميل...")} style={{width:"100%",background:C.bg,border:"1px solid "+C.accent,borderRadius:8,color:C.text,padding:"10px 12px",fontSize:14,outline:"none",boxSizing:"border-box"}}/>
           {showDrop&&dropCusts.length>0&&<div style={{position:"absolute",top:"100%",left:0,right:0,zIndex:200,background:C.card,border:"1px solid "+C.border,borderRadius:8,boxShadow:"0 8px 24px rgba(0,0,0,0.6)",marginTop:4,maxHeight:200,overflowY:"auto"}}>
             {dropCusts.map(c=><div key={c.id} onClick={()=>fillCust(c)} style={{padding:"10px 14px",cursor:"pointer",borderBottom:"1px solid "+C.border}}>
               <div style={{fontWeight:600,fontSize:13,color:C.text}}>{c.customerName}</div>
