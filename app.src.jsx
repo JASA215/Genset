@@ -1505,12 +1505,12 @@ function FUCard({s,onDone,onView,overdue,done,t,lang,user,db,branches,subs}){
     setSaving(false);
   }
 
-  return<div style={{background:done?"rgba(46,160,67,0.07)":overdue?"rgba(207,32,38,0.08)":"rgba(245,166,35,0.07)",border:"1px solid "+(done?C.green:overdue?C.red:C.accent),borderRadius:12,padding:"14px 16px",marginBottom:10}}>
+  return<div style={{background:done?C.card:overdue?C.card:C.card,border:"2px solid "+(done?C.green:overdue?C.red:C.accent),borderRadius:12,padding:"14px 16px",marginBottom:10}}>
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
       <div style={{flex:1,cursor:"pointer"}} onClick={onView}>
         <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:3,flexWrap:"wrap"}}>
           <span style={{fontWeight:700,fontSize:15}}>{s.customerName||t("Unknown","غير معروف")}</span>
-          <span style={{background:"rgba(0,0,0,0.15)",borderRadius:6,padding:"1px 6px",fontSize:10,fontWeight:700,color:stCl}}>{stIc} {stAb}</span>
+          <span style={{background:C.surface,border:"1px solid "+stCl,borderRadius:6,padding:"1px 6px",fontSize:10,fontWeight:700,color:stCl}}>{stIc} {stAb}</span>
           {s.closureType&&s.closureRef&&<span style={{background:"rgba(46,160,67,0.15)",borderRadius:6,padding:"1px 6px",fontSize:10,fontWeight:700,color:C.green}}>🔖 {s.closureRef}</span>}
         </div>
         <div style={{color:C.muted,fontSize:12}}>👷 {s.technicianName||"-"} · 📍 {s.siteLocation||"-"}</div>

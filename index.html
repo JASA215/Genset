@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530100000 -->
+<!-- v20260530110000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530100000";
+  var APP_VERSION="v20260530110000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -5258,8 +5258,8 @@ function FUCard({
   }
   return React.createElement("div", {
     style: {
-      background: done ? "rgba(46,160,67,0.07)" : overdue ? "rgba(207,32,38,0.08)" : "rgba(245,166,35,0.07)",
-      border: "1px solid " + (done ? C.green : overdue ? C.red : C.accent),
+      background: done ? C.card : overdue ? C.card : C.card,
+      border: "2px solid " + (done ? C.green : overdue ? C.red : C.accent),
       borderRadius: 12,
       padding: "14px 16px",
       marginBottom: 10
@@ -5291,7 +5291,8 @@ function FUCard({
     }
   }, s.customerName || t("Unknown", "غير معروف")), React.createElement("span", {
     style: {
-      background: "rgba(0,0,0,0.15)",
+      background: C.surface,
+      border: "1px solid " + stCl,
       borderRadius: 6,
       padding: "1px 6px",
       fontSize: 10,
