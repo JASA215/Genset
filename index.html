@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v20260530040000 -->
+<!-- v20260530050000 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -348,7 +348,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 /* ── Boot self-check: turns a silent "stuck on Loading" into a visible error ── */
 (function(){
-  var APP_VERSION="v20260530040000";
+  var APP_VERSION="v20260530050000";
   var lastErr="";
   function esc(s){return String(s).replace(/[<>&]/g,function(c){return{"<":"&lt;",">":"&gt;","&":"&amp;"}[c];});}
   function showBootError(detail){
@@ -11340,7 +11340,7 @@ function App() {
     style: {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
-      gap: 12,
+      gap: 10,
       marginBottom: 14
     }
   }, [["physical", t("Physical", "الخارجي")], ["engine", t("Engine", "المحرك")], ["tech", t("Technician", "الفني")]].map(([k, lbl]) => React.createElement("div", {
@@ -11362,20 +11362,20 @@ function App() {
   }, lbl), React.createElement("div", {
     style: {
       display: "flex",
-      gap: 4
+      gap: 3
     }
   }, [1, 2, 3, 4, 5].map(n => React.createElement("button", {
     key: n,
     onClick: () => sf("scores." + k, n),
     style: {
-      width: 36,
-      height: 36,
-      borderRadius: 8,
+      width: 28,
+      height: 28,
+      borderRadius: 6,
       border: "1px solid " + (survey.scores[k] >= n ? C.accent : C.border),
       background: survey.scores[k] >= n ? "linear-gradient(135deg,#D4820A,#B56A08)" : "transparent",
       color: survey.scores[k] >= n ? "#fff" : C.muted,
       fontWeight: 700,
-      fontSize: 13,
+      fontSize: 12,
       cursor: "pointer"
     }
   }, n))))), React.createElement("div", {
